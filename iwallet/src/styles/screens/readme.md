@@ -1,0 +1,1 @@
+Will contain stylesheets for import according the react-native
