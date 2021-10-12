@@ -8,6 +8,7 @@ const Logo = () => {
         <Image 
             source={{uri: logoImage}}
             style={styles.logo}
+            resizeMode='center'
             onLoadStart={() => setLoading(true)}
             onLoadEnd={() => setLoading(false)}
         />
@@ -16,7 +17,6 @@ const Logo = () => {
 
 const styles = StyleSheet.create({
     logo: {
-        width: 622,
         height: 401
     }
 })
