@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { SvgUri } from 'react-native-svg';
 
 const Logo = () => {
     const [loading, setLoading] = React.useState(false);
-    const logoImage = "https://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo.png";
+    const logoImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo.svg";
     return (
-        <Image 
-            source={{uri: logoImage}}
+        <SvgUri 
+            width="100%"
+            height="100%"
+            uri={logoImage}
             style={styles.logo}
-            resizeMode='center'
             onLoadStart={() => setLoading(true)}
             onLoadEnd={() => setLoading(false)}
         />
@@ -17,7 +19,8 @@ const Logo = () => {
 
 const styles = StyleSheet.create({
     logo: {
-        height: 401
+        height: 401,
+        alignSelf: 'flex-start'
     }
 })
 
