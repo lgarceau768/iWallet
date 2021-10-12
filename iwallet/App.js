@@ -14,6 +14,7 @@ import {
   View,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
+import Logo from './src/components/Logo';
 
 
 
@@ -21,7 +22,7 @@ const App = () => {
   const userTheme = useColorScheme();
   return (
     <NavigationContainer theme={userTheme === 'dark' ? DarkTheme : LightTheme}>
-      
+      <Logo/>
     </NavigationContainer>
   );
 };
