@@ -8,7 +8,6 @@ const Logo = () => {
         <Image 
             source={{uri: logoImage}}
             style={styles.logo}
-            resizeMode='cover'
             onLoadStart={() => setLoading(true)}
             onLoadEnd={() => setLoading(false)}
         />

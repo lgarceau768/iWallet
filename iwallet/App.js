@@ -21,7 +21,7 @@ import Logo from './src/components/Logo';
 const App = () => {
   const userTheme = useColorScheme();
   return (
-    <NavigationContainer theme={userTheme === 'dark' ? DarkTheme : LightTheme}>
+    <NavigationContainer theme={DarkTheme}>
       <Logo/>
     </NavigationContainer>
   );

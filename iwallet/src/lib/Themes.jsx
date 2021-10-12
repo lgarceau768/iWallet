@@ -22,4 +22,6 @@ const LightTheme = {
     }
 };
 
-export default { DarkTheme, LightTheme}
+const Themes = {DarkTheme, LightTheme}
+
+export default Themes
