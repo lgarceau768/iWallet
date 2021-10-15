@@ -18,7 +18,7 @@ import Logo from './src/components/Logo';
 import { Provider } from 'react-redux'
 import UserReducer from './src/reducer/UserReducer';
 
-// done
+// test
 
 const App = () => {
   const userTheme = useColorScheme();
