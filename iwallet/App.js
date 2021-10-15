@@ -13,17 +13,21 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
 import Logo from './src/components/Logo';
+import { Provider } from 'react-redux'
+import UserReducer from './src/reducer/UserReducer';
 
-
+// done
 
 const App = () => {
   const userTheme = useColorScheme();
   return (
-    <NavigationContainer theme={Themes.DarkTheme}>
-      <Logo/>
-    </NavigationContainer>
+    <Provider store={UserReducer}>
+      <NavigationContainer theme={Themes.DarkTheme}>
+
+      </NavigationContainer>
+    </Provider>
   );
 };
 
