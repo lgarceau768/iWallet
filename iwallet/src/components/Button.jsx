@@ -5,7 +5,7 @@ import { Text, Button } from 'react-native'
 function IButton (props) {
 
     return (
-        <Button onPress={props.onClick} title={props.text}/>
+        <Button onPress={props.onTap} title={props.text}/>
     )
 }
 
