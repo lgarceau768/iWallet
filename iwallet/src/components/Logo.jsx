@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { useState } from 'react'
 import { StyleSheet } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 
 const Logo = () => {
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = useState(false);
     const logoImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo.svg";
     return (
         <SvgUri 

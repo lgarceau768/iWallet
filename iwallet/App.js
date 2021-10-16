@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import * as React from 'react';
-import Themes from './src/lib/Themes'
+ import React, { useState } from 'react'
+import Themes from './src/util/Themes'
 import {
   StyleSheet,
   useColorScheme,
@@ -15,14 +15,15 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import Logo from './src/components/Logo';
+import IndexScreen from './src/screens/IntroScreen/IndexScreen';
 
 
 
-const App = () => {
-  const userTheme = useColorScheme();
+function App() {
+  const userTheme = useColorScheme()
   return (
     <NavigationContainer theme={Themes.DarkTheme}>
-      <Logo/>
+      <IndexScreen name="Luke"/>
     </NavigationContainer>
   );
 };
