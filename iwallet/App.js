@@ -13,18 +13,22 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
 import Logo from './src/components/Logo';
-import IndexScreen from './src/screens/IntroScreen/IndexScreen';
+import { Provider } from 'react-redux'
+import UserReducer from './src/reducer/UserReducer';
 
+// there
 
 
 function App() {
   const userTheme = useColorScheme()
   return (
-    <NavigationContainer theme={Themes.DarkTheme}>
-      <IndexScreen name="Luke"/>
-    </NavigationContainer>
+    <Provider store={UserReducer}>
+      <NavigationContainer theme={Themes.DarkTheme}>
+
+      </NavigationContainer>
+    </Provider>
   );
 };
 
