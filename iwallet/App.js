@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native'
 import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { Provider } from 'react-redux'
 
 // Our Stuff
@@ -23,18 +23,24 @@ import { createStore } from 'redux'
 const store = createStore(UserReducer)
 
 // Get Fonts
-const fetchFonts = () => {
-  return Font.loadAsync({
-  'Lato': require('./assets/fonts/Lato-Regular.ttf'),
-  'Lato-Bold': require('./assets/fonts/Lato-Bold.ttf'),
-  'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
-  });
-};
+
 
 function App() {
+  const fetchFonts = () => {
+    return Font.loadAsync({
+    'Lato': require('./assets/fonts/Lato-Regular.ttf'),
+    'Lato-Bold': require('./assets/fonts/Lato-Bold.ttf'),
+    'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
+    });
+  };
   // state font fetch control 
   const [fontloaded,setfontloaded] = useState(false);
-
+  const toggleTheme = () => {
+    const { selectedTheme, themes, t} = useTheme()
+    const setTheme = useThemeDispatch()
+    const nextTheme = selectedTheme === 'dark' ? 'light': 'dark'
+    setTheme(nextTheme)
+  }
   // Render iWallet App
   if(!fontloaded) {
     return (
@@ -51,12 +57,7 @@ function App() {
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
           <Text>Hello</Text>
           <RegularText text="Hello"/>
-          <IButton onTap={() => {
-            const { selectedTheme, themes, t} = useTheme()
-            const setTheme = useThemeDispatch()
-            const nextTheme = selectedTheme === 'dark' ? 'light': 'dark'
-            setTheme(nextTheme)
-          }} text="Theme"/>
+          <IButton onTap={toggleTheme} text="Theme"/>
         </View>
       </ThemeContainer>
     </Provider>
