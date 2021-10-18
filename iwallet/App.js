@@ -49,7 +49,7 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeContainer>
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <View>
           <IndexScreen/>
         </View>
       </ThemeContainer>
