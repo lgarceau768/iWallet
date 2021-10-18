@@ -6,7 +6,7 @@ const Logo = (props) => {
     const [loading, setLoading] = useState(false);
     const logoImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo.svg";
     const logoSmallImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo_small.svg";
-    const isSmall = props.withText ?? false; // true false
+    const isSmall = props.withImage ?? false; // true false
     if(isSmall) {
         return (
             <SvgUri 
