@@ -18,6 +18,7 @@ import ThemeContainer from './src/components/ThemeContainer'
 import RegularText from './src/components/RegularText'
 import { useTheme, useThemeDispatch } from '@pavelgric/react-native-theme-provider'
 import { createStore } from 'redux'
+import IndexScreen from './src/screens/IntroScreen/IndexScreen';
 
 // Setup User Data
 const store = createStore(UserReducer)
@@ -34,13 +35,7 @@ function App() {
     });
   };
   // state font fetch control 
-  const [fontloaded,setfontloaded] = useState(false);
-  const toggleTheme = () => {
-    const { selectedTheme, themes, t} = useTheme()
-    const setTheme = useThemeDispatch()
-    const nextTheme = selectedTheme === 'dark' ? 'light': 'dark'
-    setTheme(nextTheme)
-  }
+    const [fontloaded,setfontloaded] = useState(false);
   // Render iWallet App
   if(!fontloaded) {
     return (
@@ -55,9 +50,7 @@ function App() {
     <Provider store={store}>
       <ThemeContainer>
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>Hello</Text>
-          <RegularText text="Hello"/>
-          <IButton onTap={toggleTheme} text="Theme"/>
+          <IndexScreen/>
         </View>
       </ThemeContainer>
     </Provider>
