@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { View, Text, Alert} from 'react-native'
 import IButton from '../../components/Button'
 import RegularText from '../../components/RegularText'
+import Logo from '../../components/Logo'
 
 const IndexScreen = (props) => {
     const [currentScreen, setCurrentScreen] = useState(0)
@@ -25,7 +26,7 @@ const IndexScreen = (props) => {
     
     return (
         <View>
-            <Text>Hello</Text>
+            <Logo/>
             <RegularText text="Hello"/>
             <IButton onTap={toggleTheme.bind(this)} text="Theme"/>
         </View>
