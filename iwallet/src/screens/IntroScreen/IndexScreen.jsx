@@ -1,11 +1,22 @@
-import { useTheme, useThemeDispatch } from '@pavelgric/react-native-theme-provider'
+import { createStyle, useStyle, useTheme, useThemeDispatch } from '@pavelgric/react-native-theme-provider'
 import React, { useState } from 'react'
 import { View, Text, Alert} from 'react-native'
 import IButton from '../../components/Button'
 import RegularText from '../../components/RegularText'
 import Logo from '../../components/Logo'
 
+const styleCreator = createStyle((t) => ({
+    mainContent: {
+        height: '100%',
+        backgroundColor: t.colors.background,
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignContent: 'center'
+    }
+}))
+
 const IndexScreen = (props) => {
+    const styles = useStyle(styleCreator)
     const [currentScreen, setCurrentScreen] = useState(0)
     const [screens, setScreens] = useState([])
     const nextScreen = () => {
@@ -25,7 +36,7 @@ const IndexScreen = (props) => {
 
     
     return (
-        <View>
+        <View style={styles.mainContent}>
             <Logo/>
             <RegularText text="Hello"/>
             <IButton onTap={toggleTheme.bind(this)} text="Theme"/>
