@@ -22,6 +22,6 @@ const LightTheme = {
     }
 };
 
-const Themes = {DarkTheme, LightTheme}
+const Themes = {dark: DarkTheme, light: LightTheme}
 
 export default Themes

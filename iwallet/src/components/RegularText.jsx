@@ -1,7 +1,18 @@
 import * as React from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { Text } from 'react-native'
+import { createStyle, useStyle, useTheme } from '@pavelgric/react-native-theme-provider';
+
+// Pull style from theme (t is current theme)
+const styleCreator = createStyle((t) => ({
+    regularText: {
+        fontFamily: 'Lato',
+        fontSize: 24,
+        color: t.colors.text
+    }
+}))
 
 const RegularText = (props) => {
+    const styles = useStyle(styleCreator)
     return (
         <Text style={styles.regularText}>
             {props.text}
@@ -9,11 +20,5 @@ const RegularText = (props) => {
     )
 }
 
-const styles = StyleSheet.create({
-    regularText: {
-        fontFamily: 'Lato',
-        fontSize: '24px'
-    }
-})
 
 export default RegularText;
