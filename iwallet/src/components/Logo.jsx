@@ -5,6 +5,7 @@ import { SvgUri } from 'react-native-svg';
 const Logo = () => {
     const [loading, setLoading] = useState(false);
     const logoImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo.svg";
+    const logoImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo_small.svg";
     return (
         <SvgUri 
             width="100%"
