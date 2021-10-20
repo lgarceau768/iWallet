@@ -7,7 +7,8 @@ const DarkTheme = {
         card: 'rgb(122, 115, 198)',
         text: 'rgb(255, 255, 255)',
         border: 'rgb(0, 0, 0)',
-        notification: 'rgb(234, 16, 16)'
+        notification: 'rgb(234, 16, 16)',
+        buttonShadow: 'rgb(253, 137, 0)'
     }
 };
 
@@ -18,7 +19,8 @@ const LightTheme = {
         card: 'rgb(209, 239, 181)',
         text: 'rgb(0, 0, 0)',
         border: 'rgb(0, 0, 0)',
-        notification: 'rgb(234, 16, 16)'
+        notification: 'rgb(234, 16, 16)',
+        buttonShadow: 'rgb(253, 137, 0)'
     }
 };
 
