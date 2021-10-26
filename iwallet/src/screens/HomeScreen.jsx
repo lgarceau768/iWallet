@@ -5,6 +5,7 @@ import IButton from '../components/Button'
 import RegularText from '../components/RegularText'
 import Logo from '../components/Logo'
 import TouchableTextButton from '../components/TouchableTextButton'
+import BackButton from '../components/BackButton'
 
 const HomeScreen = (props) => {
     

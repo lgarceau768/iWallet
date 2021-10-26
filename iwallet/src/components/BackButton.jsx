@@ -1,25 +1,36 @@
+import * as React from 'react'
 import { createStyle, useStyle } from "@pavelgric/react-native-theme-provider";
 import { StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { SvgUri } from "react-native-svg";
 
-const styleCreator = createStyle((t) => ({
-    backButton: {
-        fontFamily: 'Lato',
-        fontSize: 24,
-        color: t.colors.text
-    }
-}))
-
 const BackButton = (props) => {
-    const styles = useStyle()
-    const backImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/backbtn.svg"
+    const styleCreator = createStyle((t) => ({
+        backButton: {
+            width: 54,
+            height: 42,
+            shadowOffset: {
+                height: 2,
+                width: 2,
+            },
+            color: t.colors.card,
+            shadowColor: t.colors.buttonShadow,
+            shadowOpacity: 0.2
+        }
+    }))
+
+    const goBack = function () {
+        props.navigation.goBack()
+    }
+    const styles = useStyle(styleCreator)
+    const backImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/back.svg"
     return (
-        <SvgUri
-            width="50%"
-            height="50%"
-            uri={backImage}
-            style={styles.backButton}
-        />
+        <TouchableOpacity onPress={goBack}>
+            <SvgUri
+                uri={backImage}
+                style={styles.backButton}
+            />
+        </TouchableOpacity>
     )
 }
 

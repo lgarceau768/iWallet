@@ -24,6 +24,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import CardDetailsScreen from './src/screens/CardDetails';
 import CardTypeScreen from './src/screens/CardType';
+import BackButton from './src/components/BackButton';
 
 // Setup User Data
 const store = createStore(UserReducer)
@@ -59,42 +60,42 @@ function App() {
               <Stack.Screen 
                 name="Home"  
                 component={HomeScreen}
-                options={{
+                options={({navigation, route }) => ({
                   headerTitle: null,
-                  headerRight: () => (
-                    <BackButton/>
+                  headerLeft: () => (
+                    <BackButton navigation={navigation}/>
                   )
-                }}
+                })}
               />
               <Stack.Screen 
                 name="CardDetails" 
                 component={CardDetailsScreen}
-                options={{
+                options={({navigation, route }) => ({
                   headerTitle: null,
-                  headerRight: () => (
-                    <BackButton/>
+                  headerLeft: () => (
+                    <BackButton navigation={navigation}/>
                   )
-                }}
+                })}
               />
               <Stack.Screen 
                 name="CardType"  
                 component={CardTypeScreen}
-                options={{
+                options={({navigation, route }) => ({
                   headerTitle: null,
-                  headerRight: () => (
-                    <BackButton/>
+                  headerLeft: () => (
+                    <BackButton navigation={navigation}/>
                   )
-                }}
+                })}
               />
               <Stack.Screen 
                 name="Test"  
                 component={IndexScreen}
-                options={{
+                options={({navigation, route }) => ({
                   headerTitle: null,
-                  headerRight: () => (
-                    <BackButton/>
+                  headerLeft: () => (
+                    <BackButton navigation={navigation}/>
                   )
-                }}
+                })}
               />
             </Stack.Navigator>
           </NavigationContainer>
