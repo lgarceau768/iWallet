@@ -5,7 +5,7 @@
 
  <g>
   <title>Layer 1</title>
-  <line stroke-width="6" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="22.04938" x2="12.43827" y1="-0.91357" x1="35.64814" stroke="#000" fill="none"/>
+  <line stroke-width="6" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="22.04938" x2="12.43827" y1="-0.91357" x1="35.64814" stroke="currentColor" fill="currentColor"/>
   <line transform="rotate(-90.131, 24.5988, 30.321)" stroke-width="6" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_4" y2="42.72654" x2="12.37457" y1="17.91542" x1="36.82295" stroke="#000" fill="none"/>
  </g>
 </svg>
