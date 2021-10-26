@@ -18,15 +18,20 @@ import ThemeContainer from './src/components/ThemeContainer'
 import RegularText from './src/components/RegularText'
 import { useTheme, useThemeDispatch } from '@pavelgric/react-native-theme-provider'
 import { createStore } from 'redux'
-import IndexScreen from './src/screens/IntroScreen/IndexScreen';
+import IndexScreen from './src/screens/IndexScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import CardDetailsScreen from './src/screens/CardDetails';
+import CardTypeScreen from './src/screens/CardType';
 
 // Setup User Data
 const store = createStore(UserReducer)
 
-// Get Fonts
-
+// set navigation
 
 function App() {
+  const Stack = createNativeStackNavigator();
   const fetchFonts = () => {
     return Font.loadAsync({
     'Lato': require('./assets/fonts/Lato-Regular.ttf'),
@@ -49,9 +54,50 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeContainer>
-        <View>
-          <IndexScreen/>
-        </View>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen 
+                name="Home"  
+                component={HomeScreen}
+                options={{
+                  headerTitle: null,
+                  headerRight: () => (
+                    <BackButton/>
+                  )
+                }}
+              />
+              <Stack.Screen 
+                name="CardDetails" 
+                component={CardDetailsScreen}
+                options={{
+                  headerTitle: null,
+                  headerRight: () => (
+                    <BackButton/>
+                  )
+                }}
+              />
+              <Stack.Screen 
+                name="CardType"  
+                component={CardTypeScreen}
+                options={{
+                  headerTitle: null,
+                  headerRight: () => (
+                    <BackButton/>
+                  )
+                }}
+              />
+              <Stack.Screen 
+                name="Test"  
+                component={IndexScreen}
+                options={{
+                  headerTitle: null,
+                  headerRight: () => (
+                    <BackButton/>
+                  )
+                }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
       </ThemeContainer>
     </Provider>
   )
