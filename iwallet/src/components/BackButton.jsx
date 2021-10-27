@@ -4,23 +4,25 @@ import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SvgUri } from "react-native-svg";
 
-const BackButton = (props) => {
-    const styleCreator = createStyle((t) => ({
-        backButton: {
-            width: 54,
-            height: 42,
-            shadowOffset: {
-                height: 2,
-                width: 2,
-            },
-            color: t.colors.card,
-            shadowColor: t.colors.buttonShadow,
-            shadowOpacity: 0.2
-        }
-    }))
+const styleCreator = createStyle((t) => ({
+    backButton: {
+        width: 54,
+        height: 42,
+        shadowOffset: {
+            height: 2,
+            width: 2,
+        },
+        color: t.colors.card,
+        shadowColor: t.colors.buttonShadow,
+        shadowOpacity: 0.2
+    }
+}))
 
+const BackButton = (props) => {
     const goBack = function () {
-        props.navigation.goBack()
+        try {
+            props.navigation.goBack()
+        } catch (err) {}
     }
     const styles = useStyle(styleCreator)
     const backImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/back.svg"
