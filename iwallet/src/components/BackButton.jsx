@@ -3,11 +3,12 @@ import { createStyle, useStyle } from "@pavelgric/react-native-theme-provider";
 import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SvgUri } from "react-native-svg";
+import { useNavigation } from '@react-navigation/native';
+import RegularText from './RegularText';
 
 const styleCreator = createStyle((t) => ({
     backButton: {
-        width: 54,
-        height: 42,
+        padding: 2,
         shadowOffset: {
             height: 2,
             width: 2,
@@ -19,9 +20,10 @@ const styleCreator = createStyle((t) => ({
 }))
 
 const BackButton = (props) => {
+    const navigation = useNavigation();
     const goBack = function () {
         try {
-            props.navigation.goBack()
+            navigation.goBack()
         } catch (err) {}
     }
     const styles = useStyle(styleCreator)
@@ -29,6 +31,8 @@ const BackButton = (props) => {
     return (
         <TouchableOpacity onPress={goBack}>
             <SvgUri
+                width={64}
+                height={64}
                 uri={backImage}
                 style={styles.backButton}
             />

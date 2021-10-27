@@ -56,46 +56,25 @@ function App() {
     <Provider store={store}>
       <ThemeContainer>
           <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator 
+              screenOptions={{
+                headerShown: false
+              }}>
               <Stack.Screen 
                 name="Home"  
                 component={HomeScreen}
-                options={({navigation, route }) => ({
-                  headerTitle: null,
-                  headerLeft: () => (
-                    <BackButton navigation={navigation}/>
-                  )
-                })}
               />
               <Stack.Screen 
                 name="CardDetails" 
                 component={CardDetailsScreen}
-                options={({navigation, route }) => ({
-                  headerTitle: null,
-                  headerLeft: () => (
-                    <BackButton navigation={navigation}/>
-                  )
-                })}
               />
               <Stack.Screen 
                 name="CardType"  
                 component={CardTypeScreen}
-                options={({navigation, route }) => ({
-                  headerTitle: null,
-                  headerLeft: () => (
-                    <BackButton navigation={navigation}/>
-                  )
-                })}
               />
               <Stack.Screen 
                 name="Test"  
                 component={IndexScreen}
-                options={({navigation, route }) => ({
-                  headerTitle: null,
-                  headerLeft: () => (
-                    <BackButton navigation={navigation}/>
-                  )
-                })}
               />
             </Stack.Navigator>
           </NavigationContainer>

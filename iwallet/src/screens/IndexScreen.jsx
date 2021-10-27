@@ -5,6 +5,8 @@ import IButton from '../components/Button'
 import RegularText from '../components/RegularText'
 import Logo from '../components/Logo'
 import TouchableTextButton from '../components/TouchableTextButton'
+import BackButton from '../components/BackButton'
+import MainContainer from '../components/MainScreenContainer'
 
 const IndexScreen = (props) => {
     const [currentScreen, setCurrentScreen] = useState(0)
@@ -39,12 +41,12 @@ const IndexScreen = (props) => {
     });
     
     return (
-        <View style={styles.container}>
+        <MainContainer backBtn={true} topCenterChild={() => <RegularText text="Testing Screen"/>}>
             <Logo/>
             <RegularText text="Hello"/>
             <TouchableTextButton onTap={changeScreen.bind(this)} text="HomeScreen"/>
             <TouchableTextButton onTap={toggleTheme.bind(this)} text="Theme"/>
-        </View>
+        </MainContainer>
     )
 }
 

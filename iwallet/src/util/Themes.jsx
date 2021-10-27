@@ -16,11 +16,11 @@ const LightTheme = {
     colors: {
         primary: 'rgb(255, 134, 117)',
         background: 'rgb(231, 241, 244)',
-        card: 'rgb(209, 239, 181)',
+        card: 'rgb(255, 92, 0)',
         text: 'rgb(0, 0, 0)',
         border: 'rgb(0, 0, 0)',
         notification: 'rgb(234, 16, 16)',
-        buttonShadow: 'rgb(253, 137, 0)'
+        buttonShadow: 'rgb(122, 115, 198)'
     }
 };
 

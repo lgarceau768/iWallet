@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import BackButton from '../components/BackButton';
 import RegularText from '../components/RegularText'
 
 const CardTypeScreen = (props) => {
@@ -13,6 +14,7 @@ const CardTypeScreen = (props) => {
     });
     return (
         <View style={styles.container}>
+            <BackButton/>
             <RegularText text="CardTypeScreen"/>
         </View>
     )
