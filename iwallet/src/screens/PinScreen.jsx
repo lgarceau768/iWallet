@@ -1,6 +1,6 @@
 import { createStyle, useTheme, useThemeDispatch } from '@pavelgric/react-native-theme-provider'
 import React, { useState } from 'react'
-import { View, Text, AlertIOS, TouchableHighlight} from 'react-native'
+import { View, Text, AlertIOS, TouchableHighlight, StyleSheet} from 'react-native'
 import IButton from '../components/Button'
 import RegularText from '../components/RegularText'
 import Logo from '../components/Logo'
@@ -10,67 +10,27 @@ import TouchableTextButton from '../components/TouchableTextButton'
 import { FloatingAction } from "react-native-floating-action";
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import PinButton from '../components/PinButton'
+import Numpad from '../components/NumPad'
 
-const PinScreen = () => {
+const PinScreen = (props) => {
+    const styles = StyleSheet.create({
+        container: {
+            margin: 15,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }
+    });
 
 return (
     <MainContainer backBtn={true} topCenterChild={<RegularText text="Pin Screen"/>}>
-        <RegularText text="Hello"/>
-        <PinButton onTap={() => null} child={<RegularText 
-            text="1" 
-            oppositeColor={true}
-            extraStyle={{ textAlign: 'center'}}/>}/>
-        <PinButton onTap={() => null} child={<RegularText 
-            text="2" 
-            oppositeColor={true}
-            extraStyle={{ textAlign: 'center'}}/>}/>
+        <View style={styles.container}>
+            <RegularText text="Enter Pin"/>
+        </View>
+        <RegularText text="####" oppositeColor={false} extraStyle={{textAlign: 'center', fontSize: 50, margin: 50}}/>
+        <Numpad/>
     </MainContainer>
 )
 }
-
-
-
-// const PinScreen = (props) => {
-//     PasscodeAuth.authenticate('to demo this react-native component')
-//         .then(success => {
-//             alert('Authenticated Successfully');
-//         })
-//         .catch(error => {
-//             console.log(error)
-//             alert('Authentication Failed');
-//         });
-//     return (
-//         <View>
-//             <TouchableOpacity onTap= (props) =></View>}></TouchableOpacity>
-//         </View>
-//     )
-// }
-// const PinScreen = () => {
-//     PasscodeAuth.isSupported()
-//   .then(supported => {
-//     // Success code
-//     console.log('Passcode Auth is supported.');
-//   })
-//   .catch(error => {
-//     // Failure code
-//     console.log(error);
-//   });
-//     _pressHandler = () => {
-//       PasscodeAuth.authenticate('to demo this react-native component')
-//         .then(success => {
-//           alert('Authenticated Successfully');
-//         })
-//         .catch(error => {
-//             console.log(error);
-//           alert('Authentication Failed');
-//         });
-//     }
-  
-//     return (
-//     <MainContainer backBtn={true} topCenterChild={<RegularText text="Please Enter a Pin"/>}>
-//         <TouchableTextButton text="Authenticate" onTap={_pressHandler}/>
-//     </MainContainer>
-//     );
-// }
 
 export default PinScreen
