@@ -41,7 +41,7 @@ const IndexScreen = (props) => {
     });
     
     return (
-        <MainContainer backBtn={true} topCenterChild={() => <RegularText text="Testing Screen"/>}>
+        <MainContainer backBtn={true} topCenterChild={<RegularText text="Testing Screen"/>}>
             <Logo/>
             <RegularText text="Hello"/>
             <TouchableTextButton onTap={changeScreen.bind(this)} text="HomeScreen"/>

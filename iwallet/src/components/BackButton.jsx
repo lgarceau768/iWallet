@@ -9,13 +9,14 @@ import RegularText from './RegularText';
 const styleCreator = createStyle((t) => ({
     backButton: {
         padding: 2,
+        color: t.colors.card,
         shadowOffset: {
             height: 2,
             width: 2,
         },
-        color: t.colors.card,
         shadowColor: t.colors.buttonShadow,
-        shadowOpacity: 0.2
+        shadowRadius: 4,
+        shadowOpacity: 0.75
     }
 }))
 
@@ -31,8 +32,8 @@ const BackButton = (props) => {
     return (
         <TouchableOpacity onPress={goBack}>
             <SvgUri
-                width={64}
-                height={64}
+                width={32}
+                height={32}
                 uri={backImage}
                 style={styles.backButton}
             />
