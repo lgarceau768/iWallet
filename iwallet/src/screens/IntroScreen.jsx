@@ -41,9 +41,10 @@ const IntroScreen = () => {
     console.log(currentScreen)
     return (
         <MainContainer backBtn={false} style={styles.container}> 
-            { currentScreen !== 3 ? 
-                <Logo isSmall={true}/>
-            : null}
+            { currentScreen != 3 ?
+                <Logo withImage={true}/>
+            :   <Logo/>
+            }
             { currentScreen == 2 ? 
                 <RegularText text="Add your cards into your own digital wallet." extraStyle={{textAlign: 'center'}}/>
             : null}
