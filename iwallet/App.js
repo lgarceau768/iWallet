@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import localStorage from 'react-native-sync-localstorage'
-
-// Our Stuff
-import Logo from './src/components/Logo'
-import UserReducer from './src/reducer/UserReducer'
-
-// Testing imports
-import ThemeContainer from './src/components/ThemeContainer'
-import IndexScreen from './src/screens/IndexScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import localStorage from 'react-native-sync-localstorage'
+import * as Font from 'expo-font';
+
+// Our Stuff
+import UserReducer from './src/reducer/UserReducer'
+
+// Screen imports
+import ThemeContainer from './src/components/ThemeContainer'
+import IndexScreen from './src/screens/IndexScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import CardDetailsScreen from './src/screens/CardDetails';
 import CardTypeScreen from './src/screens/CardType';
 import BackButton from './src/components/BackButton';
 import IntroScreen from './src/screens/IntroScreen';
+import PinScreen from './src/screens/PinScreen';
 
 // Setup User Data
 const store = createStore(UserReducer)
@@ -97,7 +98,10 @@ function App() {
               />
               <Stack.Screen 
                 name="Intro"  
-                component={IntroScreen}
+                component={IntroScreen}/>
+              <Stack.Screen
+                name="Pin"  
+                component={PinScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>
