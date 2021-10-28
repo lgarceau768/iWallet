@@ -14,16 +14,15 @@ import Themes from '../util/Themes'
 
 const themeCreator = createStyle((currentTheme) => ({
         circle: {
+            margin: 10,
             height: 85,
             width: 85,
             borderRadius: 50,
             backgroundColor: currentTheme.colors.pinButtonColor,
-            color: currentTheme.colors.text,
             display: 'flex',
             justifyContent: 'center',
             alignContent: 'center'
         },
-
   }))
   
   function PinButton ({onTap, child}) {

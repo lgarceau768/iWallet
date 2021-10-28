@@ -11,26 +11,21 @@ import { FloatingAction } from "react-native-floating-action";
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import PinButton from '../components/PinButton'
 
-<<<<<<< HEAD
 const PinScreen = () => {
 
 return (
     <MainContainer backBtn={true} topCenterChild={<RegularText text="Pin Screen"/>}>
         <RegularText text="Hello"/>
-        <PinButton onTap={() => null} child={<RegularText text="1"/>}/>
-        <PinButton onTap={() => null} child={<RegularText text="2"/>}/>
+        <PinButton onTap={() => null} child={<RegularText 
+            text="1" 
+            oppositeColor={true}
+            extraStyle={{ textAlign: 'center'}}/>}/>
+        <PinButton onTap={() => null} child={<RegularText 
+            text="2" 
+            oppositeColor={true}
+            extraStyle={{ textAlign: 'center'}}/>}/>
     </MainContainer>
 )
-=======
-
-const PinScreen = (props) => {
-    
-    return (
-        <View>
-            <RegularText text="PinScreen"/>
-        </View>
-    )
->>>>>>> 9a799353e1c1c3ba008f76d580b55aea1779b140
 }
 
 

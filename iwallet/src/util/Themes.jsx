@@ -9,13 +9,11 @@ const DarkTheme = {
         border: 'rgb(0, 0, 0)',
         notification: 'rgb(234, 16, 16)',
         buttonShadow: 'rgb(253, 137, 0)',
-<<<<<<< HEAD
-        pinButtonColor: 'rgb(202, 222, 222)'
-=======
+        pinButtonColor: 'rgb(202, 222, 222)',
+        oppositeThemeText: 'rgb(0, 0, 0)',
     },
     values: {        
         buttonShadowOpacity: 0.3,
->>>>>>> 9a799353e1c1c3ba008f76d580b55aea1779b140
     }
 };
 
@@ -26,15 +24,13 @@ const LightTheme = {
         card: 'rgb(255, 92, 0)',
         text: 'rgb(0, 0, 0)',
         border: 'rgb(0, 0, 0)',
+        oppositeThemeText: 'rgb(255, 255, 255)',
         notification: 'rgb(234, 16, 16)',
         buttonShadow: 'rgb(122, 115, 198)',
-<<<<<<< HEAD
         pinButtonColor: 'rgb(40, 43, 40)'
-=======
     },
     values: {        
         buttonShadowOpacity: 0.4,
->>>>>>> 9a799353e1c1c3ba008f76d580b55aea1779b140
     }
 };
 
