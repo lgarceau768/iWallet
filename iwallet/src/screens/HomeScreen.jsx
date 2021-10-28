@@ -20,8 +20,9 @@ const HomeScreen = (props) => {
         <View style={styles.container}>
             <RegularText text="Home Screen"/>
             <TouchableTextButton text="Card Details Screen" onTap={() => props.navigation.navigate('CardDetails')}/>
-            <TouchableTextButton text="Card Type Screen" onTap={() => props.navigation.navigate('CardDetails')}/>
+            <TouchableTextButton text="Card Type Screen" onTap={() => props.navigation.navigate('CardType')}/>
             <TouchableTextButton text="Testing Screen" onTap={() => props.navigation.navigate('Test')}/>
+            <TouchableTextButton text="Pin Screen" onTap={() => props.navigation.navigate('Pin')}/>
         </View>
     )
 }

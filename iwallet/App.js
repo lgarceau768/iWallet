@@ -25,6 +25,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import CardDetailsScreen from './src/screens/CardDetails';
 import CardTypeScreen from './src/screens/CardType';
 import BackButton from './src/components/BackButton';
+import PinScreen from './src/screens/PinScreen';
 
 // Setup User Data
 const store = createStore(UserReducer)
@@ -75,6 +76,10 @@ function App() {
               <Stack.Screen 
                 name="Test"  
                 component={IndexScreen}
+              />
+              <Stack.Screen 
+                name="Pin"  
+                component={PinScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>

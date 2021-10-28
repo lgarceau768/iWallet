@@ -8,7 +8,8 @@ const DarkTheme = {
         text: 'rgb(255, 255, 255)',
         border: 'rgb(0, 0, 0)',
         notification: 'rgb(234, 16, 16)',
-        buttonShadow: 'rgb(253, 137, 0)'
+        buttonShadow: 'rgb(253, 137, 0)',
+        pinButtonColor: 'rgb(202, 222, 222)'
     }
 };
 
@@ -20,7 +21,8 @@ const LightTheme = {
         text: 'rgb(0, 0, 0)',
         border: 'rgb(0, 0, 0)',
         notification: 'rgb(234, 16, 16)',
-        buttonShadow: 'rgb(122, 115, 198)'
+        buttonShadow: 'rgb(122, 115, 198)',
+        pinButtonColor: 'rgb(40, 43, 40)'
     }
 };
 
