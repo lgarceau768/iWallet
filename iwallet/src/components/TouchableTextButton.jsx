@@ -15,7 +15,7 @@ const themeCreator = createStyle((currentTheme) => ({
     borderRadius: 10,
     shadowColor: currentTheme.colors.buttonShadow,
     shadowOffset: {width: 2, height: 4},
-    shadowOpacity: 0.2,
+    shadowOpacity: currentTheme.colors.buttonShadowOpacity,
     padding: 10,
     top: "35%"
   },
