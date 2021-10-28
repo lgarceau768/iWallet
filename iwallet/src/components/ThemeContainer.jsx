@@ -9,8 +9,7 @@ const ThemeContainer = (props) => {
     return (
         <ThemeProvider
             themes={Themes}
-            initialTheme={userTheme}
-        >
+            initialTheme={userTheme}>
             {props.children}
         </ThemeProvider>
     )

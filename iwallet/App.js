@@ -18,14 +18,21 @@ import ThemeContainer from './src/components/ThemeContainer'
 import RegularText from './src/components/RegularText'
 import { useTheme, useThemeDispatch } from '@pavelgric/react-native-theme-provider'
 import { createStore } from 'redux'
+import IndexScreen from './src/screens/IndexScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import CardDetailsScreen from './src/screens/CardDetails';
+import CardTypeScreen from './src/screens/CardType';
+import BackButton from './src/components/BackButton';
 
 // Setup User Data
 const store = createStore(UserReducer)
 
-// Get Fonts
-
+// set navigation
 
 function App() {
+  const Stack = createNativeStackNavigator();
   const fetchFonts = () => {
     return Font.loadAsync({
     'Lato': require('./assets/fonts/Lato-Regular.ttf'),
@@ -34,13 +41,7 @@ function App() {
     });
   };
   // state font fetch control 
-  const [fontloaded,setfontloaded] = useState(false);
-  const toggleTheme = () => {
-    const { selectedTheme, themes, t} = useTheme()
-    const setTheme = useThemeDispatch()
-    const nextTheme = selectedTheme === 'dark' ? 'light': 'dark'
-    setTheme(nextTheme)
-  }
+    const [fontloaded,setfontloaded] = useState(false);
   // Render iWallet App
   if(!fontloaded) {
     return (
@@ -54,11 +55,29 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeContainer>
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>Hello</Text>
-          <RegularText text="Hello"/>
-          <IButton onTap={toggleTheme} text="Theme"/>
-        </View>
+          <NavigationContainer>
+            <Stack.Navigator 
+              screenOptions={{
+                headerShown: false
+              }}>
+              <Stack.Screen 
+                name="Home"  
+                component={HomeScreen}
+              />
+              <Stack.Screen 
+                name="CardDetails" 
+                component={CardDetailsScreen}
+              />
+              <Stack.Screen 
+                name="CardType"  
+                component={CardTypeScreen}
+              />
+              <Stack.Screen 
+                name="Test"  
+                component={IndexScreen}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
       </ThemeContainer>
     </Provider>
   )

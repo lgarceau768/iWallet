@@ -2,13 +2,26 @@ import React, { useState } from 'react'
 import { StyleSheet } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 
-const Logo = () => {
+const Logo = (props) => {
     const [loading, setLoading] = useState(false);
     const logoImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo.svg";
+    const logoSmallImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo_small.svg";
+    const isSmall = props.withImage ?? false; // true false
+    if(isSmall) {
+        return (
+            <SvgUri 
+                width="50%"
+                height="50%"
+                uri={logoSmallImage}
+                style={styles.logo}
+                onLoadStart={() => setLoading(true)}
+                onLoadEnd={() => setLoading(false)}
+            />
+        )
+    }
+    // render for the logo with the image
     return (
         <SvgUri 
-            width="100%"
-            height="100%"
             uri={logoImage}
             style={styles.logo}
             onLoadStart={() => setLoading(true)}
@@ -20,7 +33,8 @@ const Logo = () => {
 const styles = StyleSheet.create({
     logo: {
         height: 401,
-        alignSelf: 'flex-start'
+        width: 622,
+        alignSelf: 'center'
     }
 })
 
