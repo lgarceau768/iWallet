@@ -1,6 +1,7 @@
-import { createStyle, useStyle, useTheme, useThemeDispatch } from '@pavelgric/react-native-theme-provider'
+import { createStyle, useStyle } from '@pavelgric/react-native-theme-provider'
 import React, { useState } from 'react'
 import { View, Text, AlertIOS, TouchableHighlight} from 'react-native'
+import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const themeCreator = createStyle((currentTheme) => ({

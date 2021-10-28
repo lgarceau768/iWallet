@@ -1,14 +1,8 @@
-import { createStyle, useTheme, useThemeDispatch } from '@pavelgric/react-native-theme-provider'
 import React, { useState } from 'react'
 import { View, Text, AlertIOS, TouchableHighlight, StyleSheet} from 'react-native'
 import IButton from '../components/Button'
 import RegularText from '../components/RegularText'
-import Logo from '../components/Logo'
-import PasscodeAuth from 'react-native-passcode-auth';
 import MainContainer from '../components/MainScreenContainer'
-import TouchableTextButton from '../components/TouchableTextButton'
-import { FloatingAction } from "react-native-floating-action";
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import PinButton from '../components/PinButton'
 import Numpad from '../components/NumPad'
 
@@ -34,3 +28,4 @@ return (
 }
 
 export default PinScreen
+
