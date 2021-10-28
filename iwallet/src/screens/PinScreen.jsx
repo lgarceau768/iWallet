@@ -15,4 +15,4 @@ const PinScreen = (props) => {
     )
 }
 
-export default PinScreen
+export default PinScreen;
