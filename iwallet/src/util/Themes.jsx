@@ -8,7 +8,10 @@ const DarkTheme = {
         text: 'rgb(255, 255, 255)',
         border: 'rgb(0, 0, 0)',
         notification: 'rgb(234, 16, 16)',
-        buttonShadow: 'rgb(253, 137, 0)'
+        buttonShadow: 'rgb(253, 137, 0)',
+    },
+    values: {        
+        buttonShadowOpacity: 0.3,
     }
 };
 
@@ -20,7 +23,10 @@ const LightTheme = {
         text: 'rgb(0, 0, 0)',
         border: 'rgb(0, 0, 0)',
         notification: 'rgb(234, 16, 16)',
-        buttonShadow: 'rgb(122, 115, 198)'
+        buttonShadow: 'rgb(122, 115, 198)',
+    },
+    values: {        
+        buttonShadowOpacity: 0.4,
     }
 };
 
