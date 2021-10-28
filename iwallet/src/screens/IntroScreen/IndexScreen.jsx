@@ -4,6 +4,7 @@ import { View, Text, Alert} from 'react-native'
 import IButton from '../../components/Button'
 import RegularText from '../../components/RegularText'
 import Logo from '../../components/Logo'
+import IDialogBox from '../../components/DialogBox'
 
 const styleCreator = createStyle((t) => ({
     mainContent: {
@@ -40,6 +41,7 @@ const IndexScreen = (props) => {
             <Logo/>
             <RegularText text="Hello"/>
             <IButton onTap={toggleTheme.bind(this)} text="Theme"/>
+            <IDialogBox/>
         </View>
     )
 }
