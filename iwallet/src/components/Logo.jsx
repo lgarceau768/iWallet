@@ -22,8 +22,6 @@ const Logo = (props) => {
     // render for the logo with the image
     return (
         <SvgUri 
-            width="50%"
-            height="50%"
             uri={logoImage}
             style={styles.logo}
             onLoadStart={() => setLoading(true)}
@@ -35,6 +33,7 @@ const Logo = (props) => {
 const styles = StyleSheet.create({
     logo: {
         height: 401,
+        width: 622,
         alignSelf: 'center'
     }
 })

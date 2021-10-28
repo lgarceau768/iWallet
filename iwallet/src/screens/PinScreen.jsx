@@ -5,6 +5,7 @@ import IButton from '../components/Button'
 import RegularText from '../components/RegularText'
 import Logo from '../components/Logo'
 
+
 const PinScreen = (props) => {
     
     return (
@@ -14,4 +15,4 @@ const PinScreen = (props) => {
     )
 }
 
-export default PinScreen
+export default PinScreen;
