@@ -10,14 +10,6 @@ import MainContainer from '../components/MainScreenContainer'
 import TitleText from '../components/TitleText'
 
 const HomeScreen = (props) => {
-    
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center'
-        }
-    });
     return (
         <MainContainer backBtn={true} topCenterChild={<TitleText text="Cards"/>}>
             <RegularText text="Home Screen"/>
