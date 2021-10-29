@@ -7,6 +7,16 @@ const Logo = (props) => {
     const logoImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo.svg";
     const logoSmallImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo_small.svg";
     const isSmall = props.withImage ?? false; // true false
+
+    
+    const styles = StyleSheet.create({
+        logo: {
+            height: 401,
+            width: 622,
+            alignSelf: 'center',
+            ...props.style
+        },
+    })
     if(isSmall) {
         return (
             <SvgUri 
@@ -28,12 +38,5 @@ const Logo = (props) => {
     )
 }
 
-const styles = StyleSheet.create({
-    logo: {
-        height: 401,
-        width: 622,
-        alignSelf: 'center',
-    }
-})
 
 export default Logo;

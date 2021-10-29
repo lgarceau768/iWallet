@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet} from 'react-native'
+import { View, StyleSheet} from 'react-native'
 import RegularText from '../components/RegularText'
 import MainContainer from '../components/MainScreenContainer'
 import Numpad from '../components/NumPad'
 import { useNavigation } from '@react-navigation/native'
 import TitleText from '../components/TitleText'
+import localStorage from 'react-native-sync-localstorage'
 
-const PinScreen = (props) => {
+const ConfirmPinScreen = (props) => {
     const navigator = useNavigation()
     // will be setting up the users pin here
     const styles = StyleSheet.create({
@@ -17,7 +18,16 @@ const PinScreen = (props) => {
             justifyContent: 'center'
         }
     });
+    const mustMatch = props.route.params.pin;
     const [pinInput, setPinInput] = useState('####')
+
+    useEffect(() => {
+        if(pinInput.length == 4) {
+            if(pinInput.indexOf('#') == -1) {
+                onDone()
+            }
+        }
+    }, [pinInput])
 
     const onNumpad = (num) => {
         if(num != -1) {
@@ -34,9 +44,9 @@ const PinScreen = (props) => {
                         setPinInput(newPinString)
                     }
                 } else {
-                    let newPinString = pinInput.slice(0, 4) + '#'
+                    let newPinString = pinInput.slice(0, 3) + '#'
                     setPinInput(newPinString)
-                }
+                }                
             } else {
                 let newPinStr = pinInput.replace('#', num.toString())
                 setPinInput(newPinStr);
@@ -45,24 +55,21 @@ const PinScreen = (props) => {
     }
 
     const onDone = () => {
-        navigator.navigate('PinConfirm', { pin: pinInput})
-    }
-    
-    useEffect(() => {
-        if(pinInput.length == 4) {
-            if(pinInput.indexOf('#') == -1) {
-                onDone()
-            }
+        if(mustMatch !== pinInput) {
+            alert('Your pins do not match')
+        } else {
+            localStorage.setItem('pin', pinInput)
+            navigator.navigate('Home')
         }
-    }, [pinInput])
+    }
 
     return (
-        <MainContainer backBtn={true} topCenterChild={<TitleText text="Enter Your Pin"/>}>
+        <MainContainer backBtn={true} topCenterChild={props.openCheck ? <TitleText text="Please Enter Your Pin"/>: <TitleText text="Please Confirm Your Pin"/>}>
             <RegularText text={pinInput} oppositeColor={false} style={{textAlign: 'center', fontSize: 50, margin: 50}}/>
             <Numpad onTap={onNumpad.bind(this)}/>
         </MainContainer>
     )
 }
 
-export default PinScreen
+export default ConfirmPinScreen
 

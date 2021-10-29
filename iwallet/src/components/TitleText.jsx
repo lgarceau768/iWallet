@@ -7,6 +7,8 @@ const styleCreator = createStyle((t) => ({
     titleText: {
         fontFamily: 'Lato',
         fontSize: 30,
+        flex: 1,
+        textAlign: 'center',
         color: t.colors.text
     }
 }))
@@ -21,4 +23,4 @@ const TitleText = (props) => {
 }
 
 
-export default RegularText;TitleText
+export default TitleText

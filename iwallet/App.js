@@ -19,6 +19,7 @@ import CardTypeScreen from './src/screens/CardType';
 import BackButton from './src/components/BackButton';
 import IntroScreen from './src/screens/IntroScreen';
 import PinScreen from './src/screens/PinScreen';
+import ConfirmPinScreen from './src/screens/ConfirmPinScreen';
 
 // Setup User Data
 const store = createStore(UserReducer)
@@ -40,6 +41,7 @@ function App() {
   // check to see if the user has opened the app before
   let initialRoute = "Intro"; // Home
   
+  let ConfirmPinOptions = {}
 
   // setup storage
   localStorage.getAllFromLocalStorage()
@@ -47,7 +49,15 @@ function App() {
       setStorageLoaded(true)
       // now check to see which route to serve the app
       if(!localStorage.getItem('opened')) {
-        initialRoute = 'Home';
+        initialRoute = 'Pin';
+        let pin = localStorage.getItem('pin')
+        if(pin != null) {
+          initialRoute = 'PinConfirm'
+          ConfirmPinOptions = {
+            openCheck: true,
+            pin
+          }
+        }
       } else {
         initialRoute = 'Intro';
         localStorage.set('opened', true)
@@ -57,6 +67,7 @@ function App() {
       alert('Error reading storage.')
       console.log(err)
     })
+  
 
   // Render iWallet App
   if(!fontloaded || !storageLoaded) {
@@ -102,6 +113,11 @@ function App() {
               <Stack.Screen
                 name="Pin"  
                 component={PinScreen}
+              />
+              <Stack.Screen
+                name="PinConfirm"  
+                component={ConfirmPinScreen}
+                options={ConfirmPinOptions}
               />
             </Stack.Navigator>
           </NavigationContainer>

@@ -45,10 +45,10 @@ const MainContainer = ({ backBtn, topCenterChild, topRightChild, children}) => {
                 : <View></View>}
                 { topCenterChild !== undefined ?
                     topCenterChild
-                : null}
+                : <View></View>}
                 { topRightChild !== undefined ? 
                     topRightChild
-                : null}
+                : <View></View>}
             </View>
             {children}
         </View>

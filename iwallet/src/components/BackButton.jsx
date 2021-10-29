@@ -8,6 +8,7 @@ import RegularText from './RegularText';
 
 const styleCreator = createStyle((t) => ({
     backButton: {
+        flex: 1,
         padding: 2,
         color: t.colors.card,
         shadowOffset: {
@@ -30,7 +31,7 @@ const BackButton = (props) => {
     const styles = useStyle(styleCreator)
     const backImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/back.svg"
     return (
-        <TouchableOpacity onPress={goBack}>
+        <TouchableOpacity onPress={props.goBack === undefined ? goBack: props.goBack}>
             <SvgUri
                 width={32}
                 height={32}

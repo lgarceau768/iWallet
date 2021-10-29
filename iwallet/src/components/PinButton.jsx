@@ -1,10 +1,10 @@
 import { createStyle, useStyle } from '@pavelgric/react-native-theme-provider'
 import React, { useState } from 'react'
 import { View, Text, AlertIOS, TouchableHighlight} from 'react-native'
-import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const themeCreator = createStyle((currentTheme) => ({
+function PinButton ({onTap, child, style}) {
+    const themeCreator = createStyle((currentTheme) => ({
         circle: {
             margin: 10,
             height: 100,
@@ -17,10 +17,9 @@ const themeCreator = createStyle((currentTheme) => ({
             shadowColor: currentTheme.colors.buttonShadow,
             shadowOffset: {width: 2, height: 4},
             shadowOpacity: currentTheme.values.buttonShadowOpacity,
+            ...style
         },
   }))
-  
-  function PinButton ({onTap, child}) {
     const styles = useStyle(themeCreator)
     return (
       <View>

@@ -11,7 +11,7 @@ const RegularText = (props) => {
             fontFamily: 'Lato',
             fontSize: 24,
             color: props.oppositeColor ? t.colors.oppositeThemeText : t.colors.text,
-            ...props.extraStyle
+            ...props.style
         }
     }))
     const styles = useStyle(styleCreator)
