@@ -7,6 +7,7 @@ import Logo from '../components/Logo'
 import TouchableTextButton from '../components/TouchableTextButton'
 import BackButton from '../components/BackButton'
 import MainContainer from '../components/MainScreenContainer'
+import IDialogBox from '../components/DialogBox'
 
 const IndexScreen = (props) => {
     const [currentScreen, setCurrentScreen] = useState(0)
@@ -46,6 +47,7 @@ const IndexScreen = (props) => {
             <RegularText text="Hello"/>
             <TouchableTextButton onTap={changeScreen.bind(this)} text="HomeScreen"/>
             <TouchableTextButton onTap={toggleTheme.bind(this)} text="Theme"/>
+            <IDialogBox/>
         </MainContainer>
     )
 }

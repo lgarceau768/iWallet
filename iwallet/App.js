@@ -78,7 +78,7 @@ function App() {
               screenOptions={{
                 headerShown: false
               }}
-              initialRouteName={initialRoute}>
+              initialRouteName= "Home">
               <Stack.Screen 
                 name="Home"  
                 component={HomeScreen}
@@ -103,7 +103,7 @@ function App() {
           </NavigationContainer>
       </ThemeContainer>
     </Provider>
-  )
+
 }
 
 
