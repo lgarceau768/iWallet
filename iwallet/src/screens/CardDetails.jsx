@@ -15,8 +15,8 @@ const CardDetailsScreen = (props) => {
         }
     });
     return (
-        <MainContainer backBtn={true} topCenterChild={<TitleTextt text="Card Details Screen"/>}>
-            <BackButton/>
+        <MainContainer backBtn={true} topCenterChild={<TitleText text="Card Details Screen"/>}>
+            
             <RegularText text="CardDetailsScreen"/>
         </MainContainer>
     )

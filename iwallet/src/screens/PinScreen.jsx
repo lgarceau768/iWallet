@@ -34,7 +34,7 @@ const PinScreen = (props) => {
                         setPinInput(newPinString)
                     }
                 } else {
-                    let newPinString = pinInput.slice(0, 4) + '#'
+                    let newPinString = pinInput.slice(0, 3) + '#'
                     setPinInput(newPinString)
                 }
             } else {
