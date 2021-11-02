@@ -47,7 +47,7 @@ const IndexScreen = (props) => {
             <RegularText text="Hello"/>
             <TouchableTextButton onTap={changeScreen.bind(this)} text="HomeScreen"/>
             <TouchableTextButton onTap={toggleTheme.bind(this)} text="Theme"/>
-            <IDialogBox/>
+            <IDialogBox title="Caution" text="Are you sure you want to delete this card?"/>2
         </MainContainer>
     )
 }
