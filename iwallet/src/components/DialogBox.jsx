@@ -5,11 +5,11 @@ import RegularText from './RegularText';
 import TouchableTextButton from './TouchableTextButton';
 
 const IDialogBox = () => {
-    console.log('alert box created')
-    const createDialogbox = () =>{
+    console.log('dialog box created')
+    const createDialogbox = (props) =>{
         Alert.alert(
-            "Caution",
-            "Are you sure you want to delete this card?",
+            props.title,
+            props.text,
             [
                 {
                     text: "Cancel",
