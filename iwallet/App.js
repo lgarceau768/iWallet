@@ -103,7 +103,7 @@ function App() {
           </NavigationContainer>
       </ThemeContainer>
     </Provider>
-
+  )
 }
 
 
