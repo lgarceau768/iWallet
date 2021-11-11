@@ -41,7 +41,8 @@ const CardObject = ({
 
     return (
         <LinearGradient 
-            start={{x: }}
+            start={{x: 0, y: 0}}
+            end={{x: 0, y: 1}}
             colors={colors} 
             style={styles.container}>
             <SvgUri uri={logoImage}
