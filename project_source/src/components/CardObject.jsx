@@ -6,17 +6,8 @@ import { View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 
 const CardObject = ({
-    fullname, logoImage, number, chip, locked, tap, id
+    fullname, logoImage, number, chip, locked, tap, id, bgColors
 }) => {
-    const generateColor = () => {
-        const randomColor = Math.floor(Math.random() * 16777215)
-          .toString(16)
-          .padStart(6, '0');
-        return `#${randomColor}`;
-    };
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max) + 1;
-    }
 
     const themedStyle = createStyle((t) => ({
         container: {
@@ -34,16 +25,12 @@ const CardObject = ({
         }
     }))
     const styles = useStyle(themedStyle)
-    const colors = [];
-    for(let i = 0; i < getRandomInt(2); i++){
-        colors.push(generateColor())
-    }
 
     return (
         <LinearGradient 
             start={{x: 0, y: 0}}
-            end={{x: 0, y: 1}}
-            colors={colors} 
+            end={{x: 0.5, y: 0.5}}
+            colors={bgColors} 
             style={styles.container}>
             <SvgUri uri={logoImage}
                 style={styles.logo}

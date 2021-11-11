@@ -149,6 +149,22 @@ export class UserProvider extends React.Component {
         
         cardObj.id = uuid.v4()
         
+        
+        const generateColor = () => {
+            const randomColor = Math.floor(Math.random() * 16777215)
+            .toString(16)
+            .padStart(6, '0');
+            return `#${randomColor}`;
+        };
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max) + 2;
+        }
+
+        cardObj.bgColors = []
+        for(let i = 0; i < generateColor(2); i++){
+            cardObj.bgColors.push(generateColor())
+        }
+
         return cardObj
     } 
 
