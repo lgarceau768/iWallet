@@ -4,11 +4,8 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import localStorage from 'react-native-sync-localstorage'
 import * as Font from 'expo-font';
-
-// Our Stuff
-import UserReducer from './src/reducer/UserReducer'
+import { AsyncStorage } from 'react-native'; 
 
 // Screen imports
 import ThemeContainer from './src/components/ThemeContainer'
@@ -16,66 +13,55 @@ import IndexScreen from './src/screens/IndexScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import CardDetailsScreen from './src/screens/CardDetails';
 import CardTypeScreen from './src/screens/CardType';
-import BackButton from './src/components/BackButton';
 import IntroScreen from './src/screens/IntroScreen';
 import PinScreen from './src/screens/PinScreen';
 import ConfirmPinScreen from './src/screens/ConfirmPinScreen';
+import { UserProvider } from './src/redux/UserProvider';
+import ManualEntryScreen from './src/screens/ManualEntry';
 
-// Setup User Data
-const store = createStore(UserReducer)
 
 
 function App() {
   const Stack = createNativeStackNavigator();
-  const fetchFonts = () => {
-    return Font.loadAsync({
-    'Lato': require('./assets/fonts/Lato-Regular.ttf'),
-    'Lato-Bold': require('./assets/fonts/Lato-Bold.ttf'),
-    'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
-    });
-  };
   // state for ui holding tasks 
-  const [fontloaded,setfontloaded] = useState(false);
-  const [storageLoaded,setStorageLoaded] = useState(false);
-
+  const [loaded,setloaded] = useState(false);
   // check to see if the user has opened the app before
-  let initialRoute = "Intro"; // Home
-  
+  let initialRoute = "Home"; // Home
   let ConfirmPinOptions = {}
 
-  // setup storage
-  localStorage.getAllFromLocalStorage()
-    .then(() => {
-      setStorageLoaded(true)
-      // now check to see which route to serve the app
-      if(!localStorage.getItem('opened')) {
-        initialRoute = 'Pin';
-        let pin = localStorage.getItem('pin')
-        if(pin != null) {
-          initialRoute = 'PinConfirm'
-          ConfirmPinOptions = {
-            openCheck: true,
-            pin
-          }
+  const loadStuff = async () => {
+    const fonts = Font.loadAsync({
+      'Lato': require('./assets/fonts/Lato-Regular.ttf'),
+      'Lato-Bold': require('./assets/fonts/Lato-Bold.ttf'),
+      'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
+    });
+
+    const checkPin = async () => {
+      try {
+        let pin = await AsyncStorage.getItem('pin')
+        if(pin !== null) {
+          initialRoute = 'ConfirmPin';
+          ConfirmPinOptions = {pin}
         }
-      } else {
-        initialRoute = 'Intro';
-        localStorage.set('opened', true)
+      } catch (error) {
+        console.error(error)
       }
-    })
-    .catch(err => {
-      alert('Error reading storage.')
-      console.log(err)
-    })
-  
+    }
+
+    const promises = [];
+    promises.push(fonts);
+    promises.push(checkPin)
+
+    return Promise.all(promises)
+  }
 
   // Render iWallet App
-  if(!fontloaded || !storageLoaded) {
+  if(!loaded) {
     return (
       <AppLoading
-        startAsync={fetchFonts}
+        startAsync={loadStuff}
         onFinish={()=>{
-          setfontloaded(true)
+          setloaded(true)
         }}
         onError={console.warn}
       />
@@ -83,7 +69,7 @@ function App() {
   }
 
   return (
-    <Provider store={store}>
+    <UserProvider>
       <ThemeContainer>
           <NavigationContainer>
             <Stack.Navigator 
@@ -119,10 +105,14 @@ function App() {
                 component={ConfirmPinScreen}
                 options={ConfirmPinOptions}
               />
+              <Stack.Screen
+                name="ManualEntry"
+                component={ManualEntryScreen}
+              />
             </Stack.Navigator>
           </NavigationContainer>
       </ThemeContainer>
-    </Provider>
+    </UserProvider>
   )
 }
 

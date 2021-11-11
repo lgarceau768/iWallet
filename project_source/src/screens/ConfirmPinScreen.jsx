@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { View, StyleSheet} from 'react-native'
 import RegularText from '../components/RegularText'
 import MainContainer from '../components/MainScreenContainer'
 import Numpad from '../components/NumPad'
 import { useNavigation } from '@react-navigation/native'
 import TitleText from '../components/TitleText'
-import localStorage from 'react-native-sync-localstorage'
+import { AsyncStorage } from 'react-native'; 
+import UserContext from '../redux/UserContext'
 
+// TODO finish implementing me with replacing the numbers with * and storing the pin
 const ConfirmPinScreen = (props) => {
+    const context = useContext(UserContext)
     const navigator = useNavigation()
     // will be setting up the users pin here
     const styles = StyleSheet.create({
@@ -19,6 +22,7 @@ const ConfirmPinScreen = (props) => {
         }
     });
     const mustMatch = props.route.params.pin;
+    const [numPin, setNumPin] = useState('')
     const [pinInput, setPinInput] = useState('####')
 
     useEffect(() => {
@@ -36,6 +40,7 @@ const ConfirmPinScreen = (props) => {
                 if(firstHashTag != -1) {
                     if(firstHashTag == 1 || firstHashTag == 0) {
                         setPinInput('####')
+                        setNumPin('')
                     } else {
                         let newPinString = pinInput.slice(0, firstHashTag - 1)
                         for(let i = 0; i <= (4 - firstHashTag); i++) {
@@ -48,18 +53,34 @@ const ConfirmPinScreen = (props) => {
                     setPinInput(newPinString)
                 }                
             } else {
-                let newPinStr = pinInput.replace('#', num.toString())
-                setPinInput(newPinStr);
+                if(props.openCheck) {
+                    let newPinStr = pinInput.replace('#', '*')
+                    setPinInput(newPinStr);
+                    setNumPin(numPin + num.toString())
+                } else {
+                    let newPinStr = pinInput.replace('#', num.toString())
+                    setPinInput(newPinStr);
+                }
             }
         }
     }
 
     const onDone = () => {
-        if(mustMatch !== pinInput) {
+        let pinToCheck = pinInput
+        if(props.openCheck) {
+            pinToCheck = numPin
+        }
+        if(mustMatch !== pinToCheck) {
             alert('Your pins do not match')
         } else {
-            localStorage.setItem('pin', pinInput)
-            navigator.navigate('Home')
+            // TODO set pin in storage
+            AsyncStorage.setItem('pin', pinToCheck)
+                .then(() => {
+                    context.setPin(pinToCheck)
+                    navigator.navigate('Home')
+                })
+                .catch(console.error)
+            
         }
     }
 
