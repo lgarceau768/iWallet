@@ -36,6 +36,7 @@ const HomeScreen = (props) => {
                 chip={true}
                 tap={true}
                 locked={false}
+                bgColors={['#02AAB0', '#00CDAC']}
                 id="3782942380947203"
             />
         </MainContainer>
