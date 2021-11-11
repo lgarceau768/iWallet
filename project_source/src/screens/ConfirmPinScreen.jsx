@@ -5,8 +5,11 @@ import MainContainer from '../components/MainScreenContainer'
 import Numpad from '../components/NumPad'
 import { useNavigation } from '@react-navigation/native'
 import TitleText from '../components/TitleText'
+<<<<<<< HEAD:iwallet/src/screens/ConfirmPinScreen.jsx
+=======
 import { AsyncStorage } from 'react-native'; 
 import UserContext from '../redux/UserContext'
+>>>>>>> 8c076ffcbca1824b7cd711edd67a6191b6e5604a:project_source/src/screens/ConfirmPinScreen.jsx
 
 // TODO finish implementing me with replacing the numbers with * and storing the pin
 const ConfirmPinScreen = (props) => {
@@ -73,6 +76,9 @@ const ConfirmPinScreen = (props) => {
         if(mustMatch !== pinToCheck) {
             alert('Your pins do not match')
         } else {
+<<<<<<< HEAD:iwallet/src/screens/ConfirmPinScreen.jsx
+            navigator.navigate('Home')
+=======
             // TODO set pin in storage
             AsyncStorage.setItem('pin', pinToCheck)
                 .then(() => {
@@ -81,6 +87,7 @@ const ConfirmPinScreen = (props) => {
                 })
                 .catch(console.error)
             
+>>>>>>> 8c076ffcbca1824b7cd711edd67a6191b6e5604a:project_source/src/screens/ConfirmPinScreen.jsx
         }
     }
 

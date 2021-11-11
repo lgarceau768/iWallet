@@ -8,7 +8,6 @@ import TouchableTextButton from '../components/TouchableTextButton'
 import BackButton from '../components/BackButton'
 import MainContainer from '../components/MainScreenContainer'
 import TitleText from '../components/TitleText'
-import localStorage from 'react-native-sync-localstorage'
 
 const IndexScreen = (props) => {
     const [currentScreen, setCurrentScreen] = useState(0)
@@ -45,7 +44,6 @@ const IndexScreen = (props) => {
     return (
         <MainContainer backBtn={true} topCenterChild={<TitleText text="Testing Screen"/>}>
             <Logo/>
-            <RegularText text={localStorage.getItem('pin')}/>
             <RegularText text="Hello"/>
             <TouchableTextButton onTap={changeScreen.bind(this)} text="HomeScreen"/>
             <TouchableTextButton onTap={toggleTheme.bind(this)} text="Theme"/>

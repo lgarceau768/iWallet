@@ -16,7 +16,11 @@ import CardTypeScreen from './src/screens/CardType';
 import IntroScreen from './src/screens/IntroScreen';
 import PinScreen from './src/screens/PinScreen';
 import ConfirmPinScreen from './src/screens/ConfirmPinScreen';
+<<<<<<< HEAD:iwallet/App.js
+import ManualEntryScreen from './src/screens/ManualEntry';
+=======
 import { UserProvider } from './src/redux/UserProvider';
+>>>>>>> 8c076ffcbca1824b7cd711edd67a6191b6e5604a:project_source/App.js
 
 
 
@@ -27,6 +31,9 @@ function App() {
   // check to see if the user has opened the app before
   let initialRoute = "Home"; // Home
   let ConfirmPinOptions = {}
+<<<<<<< HEAD:iwallet/App.js
+ 
+=======
 
   const loadStuff = async () => {
     const fonts = Font.loadAsync({
@@ -53,6 +60,7 @@ function App() {
 
     return Promise.all(promises)
   }
+>>>>>>> 8c076ffcbca1824b7cd711edd67a6191b6e5604a:project_source/App.js
 
   // Render iWallet App
   if(!loaded) {
@@ -103,6 +111,10 @@ function App() {
                 name="PinConfirm"  
                 component={ConfirmPinScreen}
                 options={ConfirmPinOptions}
+              />
+              <Stack.Screen
+                name="ManualEntry"
+                component={ManualEntryScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>
