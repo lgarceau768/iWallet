@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import localStorage from 'react-native-sync-localstorage'
 import * as Font from 'expo-font';
 
 // Our Stuff
@@ -20,6 +19,7 @@ import BackButton from './src/components/BackButton';
 import IntroScreen from './src/screens/IntroScreen';
 import PinScreen from './src/screens/PinScreen';
 import ConfirmPinScreen from './src/screens/ConfirmPinScreen';
+import ManualEntryScreen from './src/screens/ManualEntry';
 
 // Setup User Data
 const store = createStore(UserReducer)
@@ -42,32 +42,7 @@ function App() {
   let initialRoute = "Intro"; // Home
   
   let ConfirmPinOptions = {}
-
-  // setup storage
-  localStorage.getAllFromLocalStorage()
-    .then(() => {
-      setStorageLoaded(true)
-      // now check to see which route to serve the app
-      if(!localStorage.getItem('opened')) {
-        initialRoute = 'Pin';
-        let pin = localStorage.getItem('pin')
-        if(pin != null) {
-          initialRoute = 'PinConfirm'
-          ConfirmPinOptions = {
-            openCheck: true,
-            pin
-          }
-        }
-      } else {
-        initialRoute = 'Intro';
-        localStorage.set('opened', true)
-      }
-    })
-    .catch(err => {
-      alert('Error reading storage.')
-      console.log(err)
-    })
-  
+ 
 
   // Render iWallet App
   if(!fontloaded || !storageLoaded) {
@@ -118,6 +93,10 @@ function App() {
                 name="PinConfirm"  
                 component={ConfirmPinScreen}
                 options={ConfirmPinOptions}
+              />
+              <Stack.Screen
+                name="ManualEntry"
+                component={ManualEntryScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>

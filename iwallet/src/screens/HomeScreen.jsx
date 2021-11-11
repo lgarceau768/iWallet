@@ -17,6 +17,7 @@ const HomeScreen = (props) => {
             <TouchableTextButton text="Card Type Screen" onTap={() => props.navigation.navigate('CardType')}/>
             <TouchableTextButton text="Testing Screen" onTap={() => props.navigation.navigate('Test')}/>
             <TouchableTextButton text="Pin Screen" onTap={() => props.navigation.navigate('Pin')}/>
+            <TouchableTextButton text="Manual Entry" onTap={() => props.navigation.navigate('ManualEntry')}/>
         </MainContainer>
     )
 }

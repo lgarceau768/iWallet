@@ -5,7 +5,6 @@ import MainContainer from '../components/MainScreenContainer'
 import Numpad from '../components/NumPad'
 import { useNavigation } from '@react-navigation/native'
 import TitleText from '../components/TitleText'
-import localStorage from 'react-native-sync-localstorage'
 
 const ConfirmPinScreen = (props) => {
     const navigator = useNavigation()
@@ -58,7 +57,6 @@ const ConfirmPinScreen = (props) => {
         if(mustMatch !== pinInput) {
             alert('Your pins do not match')
         } else {
-            localStorage.setItem('pin', pinInput)
             navigator.navigate('Home')
         }
     }
