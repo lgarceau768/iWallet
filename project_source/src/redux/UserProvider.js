@@ -5,10 +5,10 @@ import uuid from 'react-native-uuid';
 
 export class UserProvider extends React.Component {
     cardLogoImages = {
-        'Visa': 'https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/visa_logo.svg',
-        'Amex': 'https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/amex_logo.svg',
-        'MasterCard': 'https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/mastercard_logo.svg',
-        'Discover': 'https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/discover_logo.svg',
+        'Visa': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/visa_logo.svg',
+        'Amex': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/amex_logo.svg',
+        'MasterCard': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/mastercard_logo.svg',
+        'Discover': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/discover_logo.svg',
     }
     state = {
         user: {
