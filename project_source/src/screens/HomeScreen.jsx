@@ -7,6 +7,7 @@ import IconButton from '../components/IconButton'
 import { useNavigation } from '@react-navigation/native'
 import { StyleSheet, AsyncStorage } from 'react-native'
 import UserContext from '../redux/UserContext'
+import CardObject from '../components/CardObject'
 
 const HomeScreen = (props) => {
     const navigation = useNavigation();
@@ -28,6 +29,15 @@ const HomeScreen = (props) => {
 
     return (
         <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards"/>} topRightChild={SettingsIcon}>
+            <CardObject
+                fullname='Luke Garceau'
+                logoImage='https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/visa_logo.svg'
+                number='0000111122223333'
+                chip={true}
+                tap={true}
+                locked={false}
+                id="3782942380947203"
+            />
         </MainContainer>
     )
 }

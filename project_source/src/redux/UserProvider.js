@@ -5,10 +5,10 @@ import uuid from 'react-native-uuid';
 
 export class UserProvider extends React.Component {
     cardLogoImages = {
-        'Visa': require('../../assets/visa_logo.svg'),
-        'Amex': require('../../assets/amex_logo.svg'),
-        'MasterCard': require('../../assets/mastercard_logo.svg'),
-        'Discover': require('../../assets/discover_logo.svg'),
+        'Visa': 'https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/visa_logo.svg',
+        'Amex': 'https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/amex_logo.svg',
+        'MasterCard': 'https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/mastercard_logo.svg',
+        'Discover': 'https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/discover_logo.svg',
     }
     state = {
         user: {
@@ -63,7 +63,7 @@ export class UserProvider extends React.Component {
 
     validateCard(cardObj) { 
         // need to look for all fields
-        let requiredFields = ['name', 'number', 'cvv', 'exp', 'pay', 'tap', 'chip', 'locked', 'fullname']
+        let requiredFields = ['name', 'number', 'cvv', 'exp', 'pay', 'tap','zip', 'chip', 'locked', 'fullname']
         for (const field in requiredFields) {
             if (!Object.hasOwnProperty.call(cardObj, field)) {
                 return {
@@ -116,6 +116,17 @@ export class UserProvider extends React.Component {
                     error: {
                         type: 'Validation Error',
                         message: 'Invalid CVV Number'
+                    }
+                }
+            }
+
+            // validate zip
+            let zipValid = /^\d{5}$/
+            if(!zipValid.test(cardObj['zip'])) {
+                return {
+                    error: {
+                        type: 'Validation Error',
+                        message: 'Invalid Zip Code'
                     }
                 }
             }
