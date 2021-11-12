@@ -6,10 +6,11 @@ import { View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import RegularText from './RegularText';
 
+
 const CardObject = ({
     fullname, logoImage, number, chip, locked, tap, id, bgColors
 }) => {
-    const chipUri = 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/visa_logo.svg'
+    const chipUri = 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/chip.svg'
     const themedStyle = createStyle((t) => ({
         container: {
             width: '95%',
@@ -68,7 +69,7 @@ const CardObject = ({
                 <RegularText text={displayNum} oppositeColor={true} style={styles.spacedText}/>
             </View>
             <View style={styles.rightView}>
-                { chip ? <SvgUri uri={chipUri} style={styles.logo} width={70} height={40}/> : null}
+                { chip ? <SvgUri uri={chipUri} style={styles.logo} width={100} height={100} color='#F5B85F'/> : null}
             </View>
         </LinearGradient>
     )
