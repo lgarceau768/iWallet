@@ -33,6 +33,7 @@ const MainContainer = ({ backBtn, topCenterChild, topRightChild, children}) => {
             maxHeight: 60,
             display: 'flex',
             flexDirection: 'row',
+            alignItems: 'center',
             justifyContent: direction,
             alignContent: 'space-between'
         }

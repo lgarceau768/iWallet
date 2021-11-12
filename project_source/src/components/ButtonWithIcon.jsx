@@ -8,22 +8,17 @@ function ButtonWithIcon ({text, onTap}) {
         container: {
             flex: 1,
             justifyContent: "center",
-            paddingHorizontal: 10
+            alignItems: 'center'
         },
         button: {
             alignItems: 'center',
+            justifyContent: "center",
             backgroundColor: currentTheme.colors.card,
             borderRadius: 10,
             shadowColor: currentTheme.colors.buttonShadow,
-            shadowOffset: {width: 2, height: 4},
-            shadowOpacity: 0.2,
-            padding: 10,
-            top: "35%"
-        },
-        countContainer: {
-            alignItems: "center",
-            padding: 10
-        } 
+            shadowOffset: {width: 3, height: 4},
+            shadowOpacity: currentTheme.values.buttonShadowOpacity,
+        }
     }))
 
     const styles = useStyle(themeCreator)

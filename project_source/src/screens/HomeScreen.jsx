@@ -14,24 +14,18 @@ const HomeScreen = (props) => {
     const currentUser = useContext(UserContext)
 
     const openSettings = () => {
-        navigation.navigate('Settings')
+        //navigation.navigate('Settings')
     }
 
-    const style = StyleSheet.create({
-        icon: {
-            flex: 1,
-            alignSelf: 'center',
-        }
-    })
 
-    const SettingsIcon = (<IconButton icon={<Icon name="settings" size={35} color="#FFF" style={style.icon}/>} onTap={openSettings}/>)
+    const SettingsIcon = (<IconButton icon={<Icon name="settings" size={35} color="#FFF"/>} onTap={openSettings}/>)
 
 
     return (
         <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards"/>} topRightChild={SettingsIcon}>
             <CardObject
                 fullname='Luke Garceau'
-                logoImage='https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/visa_logo.svg'
+                logoImage='https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/visa_logo.svg'
                 number='0000111122223333'
                 chip={true}
                 tap={true}
