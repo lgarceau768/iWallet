@@ -4,28 +4,21 @@ import { createStyle, useStyle } from '@pavelgric/react-native-theme-provider';
 import RegularText from './RegularText';
 import TouchableTextButton from './TouchableTextButton';
 
-const IDialogBox = (props) => {
+function IDialogBox ({title, text, }) {
     console.log('dialog box created')
-    return (
-        <TouchableTextButton text="Dialog Box" onPress={createDialogbox(props)}/>
-    )
+    Alert.alert(
+    title,
+    text,
+    [
+        {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]
+    );
 }
 
-const createDialogbox = (props) =>{
-        Alert.alert(
-            props.title,
-            props.text,
-            [
-                {
-                    text: "Cancel",
-                    style: "cancel"
-                },
-                {
-                    text: "Yes",
-                    style: "default"
-                }
-            ]
-        )
-    }
 
 export default IDialogBox

@@ -40,6 +40,10 @@ const IndexScreen = (props) => {
             justifyContent: 'center'
         }
     });
+
+    const iAlertCaution = () => {
+        IDialogBox({title: "Caution", text: "Are you sure you want to delete this card?"})
+    }
     
     return (
         <MainContainer backBtn={true} topCenterChild={<RegularText text="Testing Screen"/>}>
@@ -47,7 +51,7 @@ const IndexScreen = (props) => {
             <RegularText text="Hello"/>
             <TouchableTextButton onTap={changeScreen.bind(this)} text="HomeScreen"/>
             <TouchableTextButton onTap={toggleTheme.bind(this)} text="Theme"/>
-            <IDialogBox title="Caution" text="Are you sure you want to delete this card?"/>
+            <TouchableTextButton onTap={iAlertCaution.bind(this)} text="Alert"/>
         </MainContainer>
     )
 }
