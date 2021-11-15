@@ -18,6 +18,7 @@ import PinScreen from './src/screens/PinScreen';
 import ConfirmPinScreen from './src/screens/ConfirmPinScreen';
 import { UserProvider } from './src/redux/UserProvider';
 import ManualEntryScreen from './src/screens/ManualEntry';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 
@@ -69,50 +70,50 @@ function App() {
   }
 
   return (
-    <UserProvider>
-      <ThemeContainer>
-          <NavigationContainer>
-            <Stack.Navigator 
-              screenOptions={{
-                headerShown: false
-              }}
-              initialRouteName={initialRoute}>
-              <Stack.Screen 
-                name="Home"  
-                component={HomeScreen}
-              />
-              <Stack.Screen 
-                name="CardDetails" 
-                component={CardDetailsScreen}
-              />
-              <Stack.Screen 
-                name="CardType"  
-                component={CardTypeScreen}
-              />
-              <Stack.Screen 
-                name="Test"  
-                component={IndexScreen}
-              />
-              <Stack.Screen 
-                name="Intro"  
-                component={IntroScreen}/>
-              <Stack.Screen
-                name="Pin"  
-                component={PinScreen}
-              />
-              <Stack.Screen
-                name="PinConfirm"  
-                component={ConfirmPinScreen}
-                options={ConfirmPinOptions}
-              />
-              <Stack.Screen
-                name="ManualEntry"
-                component={ManualEntryScreen}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-      </ThemeContainer>
-    </UserProvider>
+      <UserProvider>
+        <ThemeContainer>
+            <NavigationContainer>
+              <Stack.Navigator 
+                screenOptions={{
+                  headerShown: false
+                }}
+                initialRouteName={initialRoute}>
+                <Stack.Screen 
+                  name="Home"  
+                  component={HomeScreen}
+                />
+                <Stack.Screen 
+                  name="CardDetails" 
+                  component={CardDetailsScreen}
+                />
+                <Stack.Screen 
+                  name="CardType"  
+                  component={CardTypeScreen}
+                />
+                <Stack.Screen 
+                  name="Test"  
+                  component={IndexScreen}
+                />
+                <Stack.Screen 
+                  name="Intro"  
+                  component={IntroScreen}/>
+                <Stack.Screen
+                  name="Pin"  
+                  component={PinScreen}
+                />
+                <Stack.Screen
+                  name="PinConfirm"  
+                  component={ConfirmPinScreen}
+                  options={ConfirmPinOptions}
+                />
+                <Stack.Screen
+                  name="ManualEntry"
+                  component={ManualEntryScreen}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
+        </ThemeContainer>
+      </UserProvider>
   )
 }
 

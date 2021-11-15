@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native-web'
+import { View } from 'react-native'
 import RegularText from '../components/RegularText'
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 

@@ -1,32 +1,37 @@
 import React from 'react';
-import gradient from 'random-gradient'
-import { createStyle, useStyle } from '@pavelgric/react-native-theme-provider';
+import { createStyle, useStyle, useTheme } from '@pavelgric/react-native-theme-provider';
 import { SvgUri } from 'react-native-svg';
-import { View } from 'react-native'
+import { View, Image } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import RegularText from './RegularText';
+import Icon from 'react-native-vector-icons/Fontisto'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const CardObject = ({
-    fullname, logoImage, number, chip, locked, tap, id, bgColors
+    fullname, logoImage, number, chip, locked, tap, idstr, bgColors
 }) => {
-    const chipUri = 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/chip.svg'
+    const currentTheme = useTheme();
+
     const themedStyle = createStyle((t) => ({
         container: {
-            width: '95%',
+            width: '100%',
             height: 170,
             borderRadius: 15,
             borderWidth: 1,
             borderColor: t.colors.text,
             justifyContent: 'flex-start',
             flexDirection: 'row',
-            padding: 6
+            padding: 6,
         },
         logo: {
-            marginLeft: 6,
             marginTop: 15,
             width: 70,
-            height: 40
+            height: 40,
+        },
+        chip: {
+            marginLeft: 6,
+            marginTop: 15,
         },
         spacedText: {
             marginLeft: 6,
@@ -39,8 +44,18 @@ const CardObject = ({
         },
         rightView: {
             justifyContent: 'center',
+            alignItems: 'flex-end',
             flexDirection: 'column',
             flex: 0.3
+        },
+        lockedStyle: {
+            width: '95%',
+            height: 170,
+            zIndex: 10,
+        },
+        lockIcon: {
+            bottom: 120,
+            left: '40%'
         }
     }))
     const styles = useStyle(themedStyle)
@@ -52,8 +67,10 @@ const CardObject = ({
         } 
         displayNum = displayNum + number.charAt(i)
     }
+    
+    const LockedIcon = (<Icon name='locked' size={68} color={currentTheme.t.lockedColor} style={styles.lockIcon}/>)
 
-    return (
+    const CardComponent = (
         <LinearGradient 
             start={{x: 0, y: 0}}
             end={{x: 0.5, y: 0.5}}
@@ -69,10 +86,22 @@ const CardObject = ({
                 <RegularText text={displayNum} oppositeColor={true} style={styles.spacedText}/>
             </View>
             <View style={styles.rightView}>
-                { chip ? <SvgUri uri={chipUri} style={styles.logo} width={100} height={100} color='#F5B85F'/> : null}
+                { chip ? <Image source={require('../../assets/chip.png')} style={styles.logo} color='#F5B85F'/> : null}
             </View>
         </LinearGradient>
     )
+
+    if(locked) {
+        return (
+            // TODO change the onPress to pop up an alert
+            <TouchableOpacity style={styles.lockedStyle} onPress={() => alert('This card is locked')}>                
+                {CardComponent}
+                {LockedIcon}
+            </TouchableOpacity>
+        )
+    } else {
+        return CardComponent
+    }
 }
 
 export default CardObject;
