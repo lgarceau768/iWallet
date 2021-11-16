@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import Icon from 'react-native-vector-icons/Feather'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView, Animated, StyleSheet, View } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
+import Carousel from 'react-native-snap-carousel';
 
 import MainContainer from '../components/MainScreenContainer'
 import TitleText from '../components/TitleText'
@@ -15,15 +16,14 @@ const HomeScreen = (props) => {
     const navigation = useNavigation();
     const currentUser = useContext(UserContext)
 
+    /** Functions for navigation */
     const openSettings = () => {
         alert('Setting Screen')
         //navigation.navigate('Settings')
     }
-
     const openPay = (number) => {
         alert('Pay with '+number)
     }
-
     const openDelete = (number) => {
         alert('Delete card '+number)
     }
@@ -35,31 +35,41 @@ const HomeScreen = (props) => {
             justifyContent: "flex-start"
         },
         iconButtonContainer: {
+            marginHorizontal: 5,
+            padding: 5,
             width: 70,
             height: 170,
             justifyContent: 'center',
+        },
+        cardContainer: {
+            height: 400,
+            marginTop: 12,
+            justifyContent: 'center',
+            flexDirection: 'row',
+            alignItems: 'flex-start'
         }
    })
 
+    /** Icon Elements */
     const LeftSwipePay = (card) => {
         return (
             <View style={styles.iconButtonContainer}><IconButton size={65} icon={<Fontisto name="dollar" size={55} color="black"/>} onTap={() => openPay.call(null, card)} color='#52FF00'/></View>
         )
     }
-
     const RightSwipeDelete = (card) => {
         return (
-            <View style={styles.iconButtonContainer}><IconButton size={65} icon={<Icon name="trash" size={55} color="black"/>} onTap={() => openPay.call(null, card)} color='#AD4636'/></View>
+            <View style={styles.iconButtonContainer}><IconButton size={65} icon={<Icon name="trash" size={55} color="black"/>} onTap={() => openDelete.call(null, card)} color='#AD4636'/></View>
         )
     }
+    const SettingsIcon = (<IconButton size={50} color='rgb(255, 134, 117)' icon={<Icon name="settings" size={35} color="#FFF"/>} onTap={openSettings}/>)
 
-    const SettingsIcon = (<IconButton icon={<Icon name="settings" size={35} color="#FFF"/>} onTap={openSettings}/>)
+    //TODO remove this
     const cardObjectInfoList = {
         name: 'Luke Garceau',
         numbers: [
             '0000111122223333',
             '4444555566667777',
-            '88889999000012340'
+            '8888999900001234'
         ],
         logoImage: [
             'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/visa_logo.svg',
@@ -92,13 +102,28 @@ const HomeScreen = (props) => {
                 />
             </Swipeable>
         )
-    }
-        
+    }      
 
+    const renderCaroseulItem = ({item, index}) => {
+        return createCard(item)
+    }
 
     return (
         <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards"/>} topRightChild={SettingsIcon}>
-            {createCard(1)}
+            <View style={styles.cardContainer}>
+                <Carousel
+                    vertical={true}
+                    renderItem={renderCaroseulItem}
+                    data={[0, 1, 2]}
+                    itemHeight={190}
+                    sliderHeight={400}
+                    activeSlideAlignment='start'
+                    loop={true}
+                    layout='stack'
+                    layoutCardOffset={80}
+                    inactiveSlideShift={0}
+                />
+            </View>
         </MainContainer>
     )
 }

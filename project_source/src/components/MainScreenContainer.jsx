@@ -35,7 +35,7 @@ const MainContainer = ({ backBtn, topCenterChild, topRightChild, children}) => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: direction,
-            alignContent: 'space-between'
+            alignContent: 'space-between',
         }
     })
     return (

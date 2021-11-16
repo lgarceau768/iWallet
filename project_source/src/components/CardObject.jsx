@@ -49,7 +49,7 @@ const CardObject = ({
             flex: 0.3
         },
         lockedStyle: {
-            width: '95%',
+            width: '100%',
             height: 170,
             zIndex: 10,
         },
