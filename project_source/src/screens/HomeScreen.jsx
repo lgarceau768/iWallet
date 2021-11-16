@@ -31,7 +31,7 @@ const HomeScreen = (props) => {
         <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards"/>} topRightChild={SettingsIcon}>
             <CardObject
                 fullname='Luke Garceau'
-                logoImage='https://raw.githubusercontent.com/lgarceau768/iWallet/cardLogic/project_source/assets/visa_logo.svg'
+                logoImage='https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/visa_logo.svg'
                 number='0000111122223333'
                 chip={true}
                 tap={true}

@@ -29,7 +29,7 @@ const BackButton = (props) => {
         } catch (err) {}
     }
     const styles = useStyle(styleCreator)
-    const backImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/back.svg"
+    const backImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/back.svg"
     return (
         <TouchableOpacity onPress={props.goBack === undefined ? goBack: props.goBack}>
             <SvgUri
