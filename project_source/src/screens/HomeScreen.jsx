@@ -42,9 +42,11 @@ const HomeScreen = (props) => {
             justifyContent: 'center',
         },
         cardContainer: {
-            height: 400,
+            height: 300,
             marginTop: 12,
+            marginLeft: 12,
             justifyContent: 'center',
+            backgroundColor: 'blue',
             flexDirection: 'row',
             alignItems: 'flex-start'
         }
@@ -53,12 +55,12 @@ const HomeScreen = (props) => {
     /** Icon Elements */
     const LeftSwipePay = (card) => {
         return (
-            <View style={styles.iconButtonContainer}><IconButton size={65} icon={<Fontisto name="dollar" size={55} color="black"/>} onTap={() => openPay.call(null, card)} color='#52FF00'/></View>
+            <View style={styles.iconButtonContainer}><IconButton size={65} icon={<Fontisto name="dollar" size={50} color="black"/>} onTap={() => openPay.call(null, card)} color='#52FF00'/></View>
         )
     }
     const RightSwipeDelete = (card) => {
         return (
-            <View style={styles.iconButtonContainer}><IconButton size={65} icon={<Icon name="trash" size={55} color="black"/>} onTap={() => openDelete.call(null, card)} color='#AD4636'/></View>
+            <View style={styles.iconButtonContainer}><IconButton size={65} icon={<Icon name="trash" size={50} color="black"/>} onTap={() => openDelete.call(null, card)} color='#FF0000'/></View>
         )
     }
     const SettingsIcon = (<IconButton size={50} color='rgb(255, 134, 117)' icon={<Icon name="settings" size={35} color="#FFF"/>} onTap={openSettings}/>)
@@ -115,12 +117,12 @@ const HomeScreen = (props) => {
                     vertical={true}
                     renderItem={renderCaroseulItem}
                     data={[0, 1, 2]}
-                    itemHeight={190}
+                    itemHeight={90}
                     sliderHeight={400}
-                    activeSlideAlignment='start'
-                    loop={true}
-                    layout='stack'
-                    layoutCardOffset={80}
+                    activeSlideAlignment='center'
+                    loop={false}
+                    layout='tinder'
+                    layoutCardOffset={10}
                     inactiveSlideShift={0}
                 />
             </View>

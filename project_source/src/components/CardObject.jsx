@@ -15,7 +15,7 @@ const CardObject = ({
 
     const themedStyle = createStyle((t) => ({
         container: {
-            width: '100%',
+            width: '90%',
             height: 170,
             borderRadius: 15,
             borderWidth: 1,

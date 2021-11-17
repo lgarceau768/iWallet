@@ -12,9 +12,9 @@ const IconButton = ({icon, onTap, color, size}) => {
             padding: 2,
             justifyContent: 'center',
             alignItems: 'center',
-            shadowColor: t.colors.buttonShadow,
+            shadowColor: t.colors.text,
             shadowOffset: {width: 2, height: 4},
-            shadowOpacity: t.colors.buttonShadowOpacity,
+            shadowOpacity: 0.5
         }
     }))
     const styles = useStyle(styleWithTheme)
