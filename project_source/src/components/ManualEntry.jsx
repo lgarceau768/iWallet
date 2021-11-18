@@ -6,14 +6,7 @@ import { useTheme } from '@pavelgric/react-native-theme-provider';
 
 function ManualEntry () {
     const styles = StyleSheet.create({
-        // label: {
-        //     color: styles.colors.oppositeThemeText
-        // },
-        // input: {
-        //     color: styles.colors.oppositeThemeText
-        // },
         container: {
-            // backgroundColor: styles.colors.background,
             margin: 25,
             height: 300,
             // width: 300,

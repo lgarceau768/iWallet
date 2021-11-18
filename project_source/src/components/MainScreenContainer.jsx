@@ -11,7 +11,7 @@ const styleCreator = createStyle((t) => ({
         alignContent: 'flex-start',
         flex: '1',
         paddingTop: 40,
-        paddingBottom: 70,
+        paddingBottom: 20,
         paddingHorizontal: 5,
         backgroundColor: t.colors.background,
     }
@@ -33,8 +33,9 @@ const MainContainer = ({ backBtn, topCenterChild, topRightChild, children}) => {
             maxHeight: 60,
             display: 'flex',
             flexDirection: 'row',
+            alignItems: 'center',
             justifyContent: direction,
-            alignContent: 'space-between'
+            alignContent: 'space-between',
         }
     })
     return (
