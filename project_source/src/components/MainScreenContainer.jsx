@@ -11,7 +11,7 @@ const styleCreator = createStyle((t) => ({
         alignContent: 'flex-start',
         flex: '1',
         paddingTop: 40,
-        paddingBottom: 70,
+        paddingBottom: 20,
         paddingHorizontal: 5,
         backgroundColor: t.colors.background,
     }

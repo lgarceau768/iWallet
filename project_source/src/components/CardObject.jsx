@@ -15,8 +15,8 @@ const CardObject = ({
 
     const themedStyle = createStyle((t) => ({
         container: {
-            width: '90%',
-            height: 170,
+            width: '95%',
+            height: 230,
             borderRadius: 15,
             borderWidth: 1,
             borderColor: t.colors.text,
@@ -49,8 +49,6 @@ const CardObject = ({
             flex: 0.3
         },
         lockedStyle: {
-            width: '100%',
-            height: 170,
             zIndex: 10,
         },
         lockIcon: {

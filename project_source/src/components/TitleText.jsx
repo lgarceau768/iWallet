@@ -3,17 +3,20 @@ import { Text } from 'react-native'
 import { createStyle, useStyle } from '@pavelgric/react-native-theme-provider';
 
 // Pull style from theme (t is current theme)
-const styleCreator = createStyle((t) => ({
-    titleText: {
-        fontFamily: 'Lato',
-        fontSize: 30,
-        flex: 1,
-        textAlign: 'center',
-        color: t.colors.text
-    }
-}))
+
 
 const TitleText = (props) => {
+    const styleCreator = createStyle((t) => ({
+        titleText: {
+            fontFamily: 'Lato-Bold',
+            fontSize: 34,
+            fontWeight: 'bold',
+            flex: 1,
+            textAlign: 'center',
+            color: t.colors.text,
+            ...props.style
+        }
+    }))
     const styles = useStyle(styleCreator)
     return (
         <Text style={styles.titleText}>

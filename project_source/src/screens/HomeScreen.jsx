@@ -11,21 +11,29 @@ import TitleText from '../components/TitleText'
 import IconButton from '../components/IconButton'
 import UserContext from '../redux/UserContext'
 import CardObject from '../components/CardObject'
+import { useTheme } from '@pavelgric/react-native-theme-provider'
 
 const HomeScreen = (props) => {
     const navigation = useNavigation();
     const currentUser = useContext(UserContext)
+    const currentTheme = useTheme()
+    const [currentIndex, setCurrentIndex] = useState(0)
+
 
     /** Functions for navigation */
     const openSettings = () => {
         alert('Setting Screen')
         //navigation.navigate('Settings')
     }
-    const openPay = (number) => {
-        alert('Pay with '+number)
+    const openAddCards = () => {
+        alert('Add Card Screen')
+        //navigation.navigate('Settings')
     }
-    const openDelete = (number) => {
-        alert('Delete card '+number)
+    const openPay = () => {
+        alert('Pay with '+cardObjectInfoList.numbers[currentIndex])
+    }
+    const openDelete = () => {
+        alert('Delete card '+cardObjectInfoList.numbers[currentIndex])
     }
 
    const styles = StyleSheet.create({
@@ -42,28 +50,41 @@ const HomeScreen = (props) => {
             justifyContent: 'center',
         },
         cardContainer: {
-            height: 300,
             marginTop: 12,
             marginLeft: 12,
             justifyContent: 'center',
-            backgroundColor: 'blue',
             flexDirection: 'row',
-            alignItems: 'flex-start'
+            alignItems: 'flex-start',
+            flex: 1,
+        },
+        buttonContainer: {
+            height: 65,
+            padding: 10,
+            marginBottom: 10,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
         }
    })
 
     /** Icon Elements */
-    const LeftSwipePay = (card) => {
+    const LeftSwipePay = () => {
         return (
-            <View style={styles.iconButtonContainer}><IconButton size={65} icon={<Fontisto name="dollar" size={50} color="black"/>} onTap={() => openPay.call(null, card)} color='#52FF00'/></View>
+            <View style={styles.iconButtonContainer}>{LeftIcon()}</View>
         )
     }
-    const RightSwipeDelete = (card) => {
+    const RightIcon = () => {
+        return <IconButton size={65} icon={<Icon name="trash" size={50} color="black"/>} onTap={openDelete} color='#FF0000'/>
+    }
+    const LeftIcon = () => {
+        return <IconButton size={65} icon={<Fontisto name="dollar" size={50} color="black"/>} onTap={openPay} color='#52FF00'/>
+    }
+    const RightSwipeDelete = () => {
         return (
-            <View style={styles.iconButtonContainer}><IconButton size={65} icon={<Icon name="trash" size={50} color="black"/>} onTap={() => openDelete.call(null, card)} color='#FF0000'/></View>
+            <View style={styles.iconButtonContainer}>{RightIcon()}</View>
         )
     }
     const SettingsIcon = (<IconButton size={50} color='rgb(255, 134, 117)' icon={<Icon name="settings" size={35} color="#FFF"/>} onTap={openSettings}/>)
+    const AddIcon = (<IconButton size={65} color="#7A73C6" icon={<Icon name="plus" size={50} color="#FFF"/>} onTap={openAddCards}/>)
 
     //TODO remove this
     const cardObjectInfoList = {
@@ -91,7 +112,7 @@ const HomeScreen = (props) => {
 
     const createCard = (index) => {
         return(
-            <Swipeable renderLeftActions={() => LeftSwipePay(cardObjectInfoList.numbers[index])} renderRightActions={() => RightSwipeDelete(cardObjectInfoList.numbers[index])}>            
+            <Swipeable renderLeftActions={() => LeftSwipePay()} renderRightActions={() => RightSwipeDelete()}>            
                 <CardObject
                     fullname={cardObjectInfoList.name}
                     number={cardObjectInfoList.numbers[index]}
@@ -111,20 +132,26 @@ const HomeScreen = (props) => {
     }
 
     return (
-        <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards"/>} topRightChild={SettingsIcon}>
+        <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards" style={{textAlign: 'left'}}/>} topRightChild={SettingsIcon}>
             <View style={styles.cardContainer}>
                 <Carousel
+                    onSnapToItem={setCurrentIndex}
                     vertical={true}
                     renderItem={renderCaroseulItem}
                     data={[0, 1, 2]}
-                    itemHeight={90}
-                    sliderHeight={400}
-                    activeSlideAlignment='center'
-                    loop={false}
+                    itemHeight={110}
+                    sliderHeight={450}
+                    activeSlideAlignment='start'
+                    loop={true}
                     layout='tinder'
                     layoutCardOffset={10}
                     inactiveSlideShift={0}
                 />
+            </View>
+            <View style={styles.buttonContainer}>
+                {currentIndex !== -1 ? RightIcon(cardObjectInfoList.numbers[currentIndex]): <View></View>}
+                {currentIndex !== -1 ? LeftIcon(cardObjectInfoList.numbers[currentIndex]): <View></View>}
+                {AddIcon}
             </View>
         </MainContainer>
     )
