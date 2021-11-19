@@ -6,10 +6,10 @@ import { LinearGradient } from 'expo-linear-gradient'
 import RegularText from './RegularText';
 import Icon from 'react-native-vector-icons/Fontisto'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 const CardObject = ({
-    fullname, logoImage, number, chip, locked, tap, idstr, bgColors
+    cardType, cardData
 }) => {
     const currentTheme = useTheme();
 
@@ -29,24 +29,42 @@ const CardObject = ({
             width: 70,
             height: 40,
         },
+        spacer: {
+            height: 105,
+        },
+        icon: {
+            height: 70,
+            marginTop: 15,
+            marginLeft: 6
+        },
         chip: {
             marginLeft: 6,
             marginTop: 15,
         },
         spacedText: {
             marginLeft: 6,
-            marginTop: 15
+            marginTop: 15,
+            marginRight: 6,
+        },
+        moreSpacedText: {
+            marginLeft: 6,
+            marginTop: 35,
+            marginRight: 6,
         },
         leftView: {
             justifyContent: 'flex-start',
+            alignItems: 'flex-start',
             flexDirection: 'column',
-            flex: 0.7
+            flex: cardType == 'pay' ? 0.7: 0.6,
         },
         rightView: {
-            justifyContent: 'center',
-            alignItems: 'flex-end',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
             flexDirection: 'column',
-            flex: 0.3
+            flex: cardType == 'pay' ? 0.3: 0.4,
+        },
+        smallSpacer: {
+            height: 60
         },
         lockedStyle: {
             zIndex: 10,
@@ -57,49 +75,75 @@ const CardObject = ({
         }
     }))
     const styles = useStyle(themedStyle)
-    // add spaces to the card number
-    let displayNum = '';
-    for(let i = 0; i < number.length + 4; i++) {
-        if(i % 4 == 0 && i !== 0) {
-            displayNum = displayNum + ' '
-        } 
-        displayNum = displayNum + number.charAt(i)
-    }
-    
     const LockedIcon = (<Icon name='locked' size={68} color={currentTheme.t.lockedColor} style={styles.lockIcon}/>)
 
-    const CardComponent = (
-        <LinearGradient 
-            start={{x: 0, y: 0}}
-            end={{x: 0.5, y: 0.5}}
-            colors={bgColors} 
-            style={styles.container}>
-            <View style={styles.leftView}>
-                <SvgUri uri={logoImage}
-                    style={styles.logo}
-                    width={70}
-                    height={40}
-                />
-                <RegularText text={fullname} oppositeColor={true} style={styles.spacedText}/>
-                <RegularText text={displayNum} oppositeColor={true} style={styles.spacedText}/>
-            </View>
-            <View style={styles.rightView}>
-                { chip ? <Image source={require('../../assets/chip.png')} style={styles.logo} color='#F5B85F'/> : null}
-            </View>
-        </LinearGradient>
-    )
-
-    if(locked) {
-        return (
-            // TODO change the onPress to pop up an alert
-            <TouchableOpacity style={styles.lockedStyle} onPress={() => alert('This card is locked')}>                
-                {CardComponent}
-                {LockedIcon}
-            </TouchableOpacity>
+    if(cardType == 'pay') {
+        // add spaces to the card number
+        let displayNum = '';
+        for(let i = 0; i < cardData.number.length + 4; i++) {
+            if(i % 4 == 0 && i !== 0) {
+                displayNum = displayNum + ' '
+            } 
+            displayNum = displayNum + cardData.number.charAt(i)
+        }
+        const CardComponent = (
+            <LinearGradient 
+                start={{x: 0, y: 0}}
+                end={{x: 0.5, y: 0.5}}
+                colors={cardData.bgColors} 
+                style={styles.container}>
+                <View style={styles.leftView}>
+                    <SvgUri uri={cardData.logoImage}
+                        style={styles.logo}
+                        width={70}
+                        height={40}
+                    />
+                    <RegularText text={cardData.fullname} oppositeColor={true} style={styles.moreSpacedText}/>
+                    <RegularText text={displayNum} oppositeColor={true} style={styles.spacedText}/>
+                </View>
+                <View style={styles.rightView}>
+                    <View style={styles.smallSpacer}></View>
+                    { cardData.chip ? <Image source={require('../../assets/chip.png')} style={styles.logo} color='#F5B85F'/> : <View style={styles.logo}></View>}
+                    <RegularText text={cardData.exp} oppositeColor={true} style={styles.spacedText}/>
+                </View>
+            </LinearGradient>
         )
-    } else {
-        return CardComponent
+    
+        if(cardData.locked) {
+            return (
+                // TODO change the onPress to pop up an alert
+                <TouchableOpacity style={styles.lockedStyle} onPress={() => alert('This card is locked')}>                
+                    {CardComponent}
+                    {LockedIcon}
+                </TouchableOpacity>
+            )
+        } else {
+            return CardComponent
+        }
+    } else if(cardType == 'id') {
+        // fields will be
+        const { number, fullname, exp, tap, cardName, iconName, bgColors } = cardData 
+        return (
+            <LinearGradient 
+                start={{x: 0, y: 0}}
+                end={{x: 0.5, y: 0.5}}
+                colors={bgColors} 
+                style={styles.container}>
+                <View style={styles.leftView}>
+                    <FontAwesome name={iconName} size={70} color={currentTheme.t.oppositeThemeText} style={styles.icon}/>
+                    <RegularText text={cardName} oppositeColor={true} style={styles.moreSpacedText}/>
+                    <RegularText text={number} oppositeColor={true} style={styles.spacedText}/>
+                </View>
+                <View style={styles.rightView}>
+                    <View style={styles.spacer}></View>
+                    <RegularText text={fullname} oppositeColor={true} style={styles.spacedText}/>
+                    <RegularText text={exp} oppositeColor={true} style={styles.spacedText}/>
+                </View>
+            </LinearGradient>
+        )
     }
+
+    
 }
 
 export default CardObject;
