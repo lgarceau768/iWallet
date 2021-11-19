@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { createStyle, useStyle } from '@pavelgric/react-native-theme-provider';
 import RegularText from '../components/RegularText';
-import Icon from 'react-native-vector-icons/AntDesign'
+import Icon from 'react-native-vector-icons/Octicons';
 
-function ButtonWithIcon ({text, onTap, iconName, size, color}) {
+function ButtonWithIcon ({text, onTap, iconName, iconSize, iconColor}) {
     const themeCreator = createStyle((currentTheme) => ({
         container: {
             flex: 1,
@@ -16,6 +16,9 @@ function ButtonWithIcon ({text, onTap, iconName, size, color}) {
             justifyContent: "center",
             backgroundColor: currentTheme.colors.card,
             borderRadius: 10,
+            padding: 15,
+            height: 100,
+            width: 200,
             shadowColor: currentTheme.colors.buttonShadow,
             shadowOffset: {width: 3, height: 4},
             shadowOpacity: currentTheme.values.buttonShadowOpacity,
@@ -29,8 +32,11 @@ function ButtonWithIcon ({text, onTap, iconName, size, color}) {
             style={styles.button}
             onPress={onTap}
         >
-        <Icon name={iconName}
+            <RegularText text={text}/>
+            <Icon name={iconName} size={iconSize} color={iconColor}></Icon>
         </TouchableOpacity>
         </View>
     )     
 }
+
+export default ButtonWithIcon
