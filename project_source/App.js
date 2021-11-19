@@ -5,20 +5,21 @@ import { createStore } from 'redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Font from 'expo-font';
-import { AsyncStorage } from 'react-native'; 
+import { AsyncStorage } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // Screen imports
 import ThemeContainer from './src/components/ThemeContainer'
 import IndexScreen from './src/screens/IndexScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import CardDetailsScreen from './src/screens/CardDetails';
-import CardTypeScreen from './src/screens/CardType';
+import CardTypeScreen from './src/screens/CardTypeScreen';
 import IntroScreen from './src/screens/IntroScreen';
 import PinScreen from './src/screens/PinScreen';
 import ConfirmPinScreen from './src/screens/ConfirmPinScreen';
 import { UserProvider } from './src/redux/UserProvider';
-import ManualEntryScreen from './src/screens/ManualEntry';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import ManualEntryScreen from './src/screens/ManualEntryScreen';
+
 
 
 
@@ -70,50 +71,50 @@ function App() {
   }
 
   return (
-      <UserProvider>
-        <ThemeContainer>
-            <NavigationContainer>
-              <Stack.Navigator 
-                screenOptions={{
-                  headerShown: false
-                }}
-                initialRouteName={initialRoute}>
-                <Stack.Screen 
-                  name="Home"  
-                  component={HomeScreen}
-                />
-                <Stack.Screen 
-                  name="CardDetails" 
-                  component={CardDetailsScreen}
-                />
-                <Stack.Screen 
-                  name="CardType"  
-                  component={CardTypeScreen}
-                />
-                <Stack.Screen 
-                  name="Test"  
-                  component={IndexScreen}
-                />
-                <Stack.Screen 
-                  name="Intro"  
-                  component={IntroScreen}/>
-                <Stack.Screen
-                  name="Pin"  
-                  component={PinScreen}
-                />
-                <Stack.Screen
-                  name="PinConfirm"  
-                  component={ConfirmPinScreen}
-                  options={ConfirmPinOptions}
-                />
-                <Stack.Screen
-                  name="ManualEntry"
-                  component={ManualEntryScreen}
-                />
-              </Stack.Navigator>
-            </NavigationContainer>
-        </ThemeContainer>
-      </UserProvider>
+    <UserProvider>
+      <ThemeContainer>
+          <NavigationContainer>
+            <Stack.Navigator 
+              screenOptions={{
+                headerShown: false
+              }}
+              initialRouteName={initialRoute}>
+              <Stack.Screen 
+                name="Home"  
+                component={HomeScreen}
+              />
+              <Stack.Screen 
+                name="CardDetails" 
+                component={CardDetailsScreen}
+              />
+              <Stack.Screen 
+                name="CardType"  
+                component={CardTypeScreen}
+              />
+              <Stack.Screen 
+                name="Test"  
+                component={IndexScreen}
+              />
+              <Stack.Screen 
+                name="Intro"  
+                component={IntroScreen}/>
+              <Stack.Screen
+                name="Pin"  
+                component={PinScreen}
+              />
+              <Stack.Screen
+                name="PinConfirm"  
+                component={ConfirmPinScreen}
+                options={ConfirmPinOptions}
+              />
+              <Stack.Screen
+                name="ManualEntry"
+                component={ManualEntryScreen}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+      </ThemeContainer>
+    </UserProvider>
   )
 }
 
