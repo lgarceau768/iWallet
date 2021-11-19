@@ -13,6 +13,9 @@ const CardTypeScreen = (props) => {
     const manualEntryScreenChange = () => {
         navigation.navigate('ManualEntry');
     }
+    const cardScannerScreenChange = () => {
+        navigation.navigate('Scanner');
+    }
 
     
     const styles = StyleSheet.create({
@@ -24,10 +27,12 @@ const CardTypeScreen = (props) => {
     });
 
     return (
-        <MainContainer backBtn={true} topCenterChild={<TitleText text="CardType Screen"/>}>
-
-            <RegularText text="What type of card is it?"/>
+        <MainContainer backBtn={true} topCenterChild={<TitleText text="What type of card is it?"/>}>
             <TouchableTextButton onTap={manualEntryScreenChange.bind(this)} text="Manual Entry"/>
+            <TouchableTextButton onTap={cardScannerScreenChange.bind(this)} text="Credit Card"/>
+            <TouchableTextButton onTap={cardScannerScreenChange.bind(this)} text="ID Card"/>
+            <TouchableTextButton onTap={cardScannerScreenChange.bind(this)} text="Non Tap Pay"/>
+            <TouchableTextButton onTap={cardScannerScreenChange.bind(this)} text="Other"/>
         </MainContainer>
     )
 }

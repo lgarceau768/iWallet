@@ -13,7 +13,7 @@ import ThemeContainer from './src/components/ThemeContainer'
 import IndexScreen from './src/screens/IndexScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import CardDetailsScreen from './src/screens/CardDetails';
-import CardTypeScreen from './src/screens/CardType';
+import CardTypeScreen from './src/screens/CardTypeScreen';
 import IntroScreen from './src/screens/IntroScreen';
 import PinScreen from './src/screens/PinScreen';
 import ConfirmPinScreen from './src/screens/ConfirmPinScreen';
