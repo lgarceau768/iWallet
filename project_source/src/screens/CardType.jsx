@@ -4,8 +4,16 @@ import BackButton from '../components/BackButton';
 import MainContainer from '../components/MainScreenContainer';
 import RegularText from '../components/RegularText'
 import TitleText from '../components/TitleText';
+import { useNavigation } from '@react-navigation/native'
+import TouchableTextButton from '../components/TouchableTextButton';
 
 const CardTypeScreen = (props) => {
+    const navigation = useNavigation();
+
+    const manualEntryScreenChange = () => {
+        navigation.navigate('ManualEntry');
+    }
+
     
     const styles = StyleSheet.create({
         container: {
@@ -14,10 +22,12 @@ const CardTypeScreen = (props) => {
             justifyContent: 'center'
         }
     });
+
     return (
         <MainContainer backBtn={true} topCenterChild={<TitleText text="CardType Screen"/>}>
 
-            <RegularText text="CardTypeScreen"/>
+            <RegularText text="What type of card is it?"/>
+            <TouchableTextButton onTap={manualEntryScreenChange.bind(this)} text="Manual Entry"/>
         </MainContainer>
     )
 }

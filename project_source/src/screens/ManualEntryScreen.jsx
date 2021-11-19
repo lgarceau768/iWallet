@@ -26,7 +26,7 @@ const ManualEntryScreen = (props) => {
     }
 
     return (
-        <MainContainer backBtn={true} topCenterChild={<TitleText text="Manual Credit Card Entry"/>}>
+        <MainContainer backBtn={true} topCenterChild={<TitleText text="Manual CC Entry"/>}>
             {/* <TouchableTextButton onTap={toggleTheme.bind(this)} text="Theme"/> */}
             <ManualEntry />
             <TouchableTextButton onTap={toggleTheme.bind(this)} text="Theme"/>

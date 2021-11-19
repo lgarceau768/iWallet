@@ -9,6 +9,7 @@ const TitleText = (props) => {
     const styleCreator = createStyle((t) => ({
         titleText: {
             fontFamily: 'Lato-Bold',
+            paddingBottom: 40,
             fontSize: 34,
             fontWeight: 'bold',
             flex: 1,

@@ -12,7 +12,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ThemeContainer from './src/components/ThemeContainer'
 import IndexScreen from './src/screens/IndexScreen';
 import HomeScreen from './src/screens/HomeScreen';
-import CardDetailsScreen from './src/scre  ens/CardDetails';
+import CardDetailsScreen from './src/screens/CardDetails';
 import CardTypeScreen from './src/screens/CardType';
 import IntroScreen from './src/screens/IntroScreen';
 import PinScreen from './src/screens/PinScreen';
@@ -28,7 +28,7 @@ function App() {
   // state for ui holding tasks 
   const [loaded,setloaded] = useState(false);
   // check to see if the user has opened the app before
-  let initialRoute = "ManualEntry"; // Home
+  let initialRoute = "Home"; // Home
   let ConfirmPinOptions = {}
 
   const loadStuff = async () => {

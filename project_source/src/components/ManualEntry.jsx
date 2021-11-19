@@ -5,6 +5,7 @@ import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-i
 import { useTheme } from '@pavelgric/react-native-theme-provider';
 
 function ManualEntry () {
+    const { t } = useTheme();
     const styles = StyleSheet.create({
         container: {
             margin: 25,
@@ -14,6 +15,13 @@ function ManualEntry () {
             display: 'flex',
             alignItems: 'center',
 
+        },
+        input: {
+            color: t.oppositeColor ? t.colors.oppositeThemeText : t.colors.text
+        },
+        input2: {
+            // fontSize: 60,
+            color: t.oppositeColor ? t.colors.oppositeThemeText : t.colors.text
         }
 
     })
@@ -21,7 +29,7 @@ function ManualEntry () {
     const _onChange = (form) => console.log(form);
     const _onFocus = (field) => console.log("focusing", field);
 
-    const { t } = useTheme();
+    
 
     // const styles = useStyle(styleCreator)
     return (
@@ -35,9 +43,9 @@ function ManualEntry () {
                 requiresCVC
                 requiresPostalCode
 
-                // labelStyle={themeCreator.label}
-                // inputStyle={themeCreator.input}
-                validColor={"black"}
+                labelStyle={styles.input2}
+                inputStyle={styles.input2}
+                validColor={styles.input.color}
                 invalidColor={"red"}
                 // placeholderColor={themeCreator.lablel}
 

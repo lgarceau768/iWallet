@@ -26,8 +26,8 @@ const HomeScreen = (props) => {
         //navigation.navigate('Settings')
     }
     const openAddCards = () => {
-        alert('Add Card Screen')
-        //navigation.navigate('Settings')
+        // alert('Add Card Screen')
+        navigation.navigate('CardType')
     }
     const openPay = () => {
         alert('Pay with '+cardObjectInfoList.numbers[currentIndex])
@@ -132,19 +132,6 @@ const HomeScreen = (props) => {
     }
 
     return (
-<<<<<<< HEAD
-        <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards"/>} topRightChild={SettingsIcon}>
-            <CardObject
-                fullname='Luke Garceau'
-                logoImage='https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/visa_logo.svg'
-                number='0000111122223333'
-                chip={true}
-                tap={true}
-                locked={false}
-                bgColors={['#02AAB0', '#00CDAC']}
-                id="3782942380947203"
-            />
-=======
         <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards" style={{textAlign: 'left'}}/>} topRightChild={SettingsIcon}>
             <View style={styles.cardContainer}>
                 <Carousel
@@ -166,7 +153,6 @@ const HomeScreen = (props) => {
                 {currentIndex !== -1 ? LeftIcon(cardObjectInfoList.numbers[currentIndex]): <View></View>}
                 {AddIcon}
             </View>
->>>>>>> a8a3227da88223112df2a510e5fc756d920dcb78
         </MainContainer>
     )
 }
