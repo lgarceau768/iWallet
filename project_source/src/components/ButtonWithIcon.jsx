@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { createStyle, useStyle } from '@pavelgric/react-native-theme-provider';
 import RegularText from '../components/RegularText';
+import Icon from 'react-native-vector-icons/AntDesign'
 
-function ButtonWithIcon ({text, onTap}) {
+function ButtonWithIcon ({text, onTap, iconName, size, color}) {
     const themeCreator = createStyle((currentTheme) => ({
         container: {
             flex: 1,
@@ -28,11 +29,8 @@ function ButtonWithIcon ({text, onTap}) {
             style={styles.button}
             onPress={onTap}
         >
-            <RegularText text={text}/>
-            
+        <Icon name={iconName}
         </TouchableOpacity>
         </View>
     )     
 }
-
-

@@ -107,22 +107,45 @@ const HomeScreen = (props) => {
             ['#02AAB0', '#00CDAC'],
             ['#5DE0F0', '#F7A6F5']
         ],
-        ids: ['1', '2', '3']
+        cardName: ['49er', 'Work ID', 'Costco'],
+        iconName: ['podcast', 'child', 'telegram'],
+        ids: ['1', '2', '3'],
+        exp: ['05/31', '11/23', '01/22']
     }
 
     const createCard = (index) => {
+        if(index == 1) {
+            return (
+                <Swipeable renderLeftActions={() => LeftSwipePay()} renderRightActions={() => RightSwipeDelete()}>            
+                    <CardObject
+                        cardType="id"
+                        cardData={{
+                            fullname: cardObjectInfoList.name,
+                            number: cardObjectInfoList.numbers[index],
+                            bgColors: cardObjectInfoList.bgColors[index],
+                            tap: cardObjectInfoList.tap[index],
+                            cardName: cardObjectInfoList.cardName[index],
+                            exp: cardObjectInfoList.exp[index],
+                            iconName: cardObjectInfoList.iconName[index]
+                    }}/>
+                </Swipeable>
+            )
+        }
         return(
             <Swipeable renderLeftActions={() => LeftSwipePay()} renderRightActions={() => RightSwipeDelete()}>            
                 <CardObject
-                    fullname={cardObjectInfoList.name}
-                    number={cardObjectInfoList.numbers[index]}
-                    bgColors={cardObjectInfoList.bgColors[index]}
-                    chip={cardObjectInfoList.chip[index]}
-                    locked={cardObjectInfoList.locked[index]}
-                    tap={cardObjectInfoList.tap[index]}
-                    idstr={cardObjectInfoList.ids[index]}    
-                    logoImage={cardObjectInfoList.logoImage[index]}
-                />
+                    cardType="pay"
+                    cardData={{
+                        fullname: cardObjectInfoList.name,
+                        number: cardObjectInfoList.numbers[index],
+                        bgColors: cardObjectInfoList.bgColors[index],
+                        chip: cardObjectInfoList.chip[index],
+                        locked: cardObjectInfoList.locked[index],
+                        tap: cardObjectInfoList.tap[index],
+                        idstr: cardObjectInfoList.ids[index],
+                        logoImage: cardObjectInfoList.logoImage[index],
+                        exp: cardObjectInfoList.exp[index]
+                }}/>
             </Swipeable>
         )
     }      
