@@ -27,7 +27,7 @@ function App() {
   // state for ui holding tasks 
   const [loaded,setloaded] = useState(false);
   // check to see if the user has opened the app before
-  let initialRoute = "Home"; // Home
+  let initialRoute = "CardType"; // Home
   let ConfirmPinOptions = {}
 
   const loadStuff = async () => {
