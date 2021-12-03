@@ -11,10 +11,11 @@ import TitleText from '../components/TitleText'
 import IconButton from '../components/IconButton'
 import UserContext from '../redux/UserContext'
 import CardObject from '../components/CardObject'
-import { useTheme } from '@pavelgric/react-native-theme-provider'
+import IDialogBox from '../components/DialogBox'
 
 const HomeScreen = (props) => {
     const navigation = useNavigation();
+    let carousel = useRef(null)
     const [currentIndex, setCurrentIndex] = useState(0)
     const UserData = useContext(UserContext)
 
@@ -29,10 +30,20 @@ const HomeScreen = (props) => {
         navigation.navigate('CardType')
     }
     const openPay = () => {
-        alert('Pay with '+cardObjectInfoList.numbers[currentIndex])
+        alert('Pay with '+carousel.currentIndex)
+        
     }
+    const deleteCard = () => {
+        UserData.removeCard(carousel.currentIndex, console.error, () => {})
+    }
+
     const openDelete = () => {
-        alert('Delete card '+cardObjectInfoList.numbers[currentIndex])
+        IDialogBox({
+            title: "Caution", 
+            text: "Are you sure you want to delete this card?",
+            onYes: deleteCard,
+            onCancel: () => {}
+        })
     }
 
    const styles = StyleSheet.create({
@@ -118,6 +129,7 @@ const HomeScreen = (props) => {
             
                 <View style={styles.cardContainer}>
                     <Carousel
+                        ref={(c) => carousel = c}
                         onSnapToItem={setCurrentIndex}
                         vertical={true}
                         renderItem={renderCaroseulItem}
