@@ -88,7 +88,7 @@ export class UserProvider extends React.Component {
 
     validateCard(cardObj) { 
         // need to look for all fields
-        let requiredFields = ['name', 'number', 'cvv', 'exp', 'pay', 'tap','zip', 'chip', 'locked', 'fullname']
+        let requiredFields = ['name', 'number', 'cvv', 'expiry', 'pay', 'tap','postalCode', 'chip', 'locked', 'fullname']
         for (const field in requiredFields) {
             if (!Object.hasOwnProperty.call(cardObj, field)) {
                 return {
@@ -145,9 +145,9 @@ export class UserProvider extends React.Component {
                 }
             }
 
-            // validate zip
+            // validate postalCode
             let zipValid = /^\d{5}$/
-            if(!zipValid.test(cardObj['zip'])) {
+            if(!zipValid.test(cardObj['postalCode'])) {
                 return {
                     error: {
                         type: 'Validation Error',
@@ -156,9 +156,9 @@ export class UserProvider extends React.Component {
                 }
             }
 
-            // validate the exp
+            // validate the expiry
             let expireValid = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
-            if(!expireValid.test(cardObj['exp'])) {
+            if(!expireValid.test(cardObj['expiry'])) {
                 return {
                     error: {
                         type: 'Validation Error',

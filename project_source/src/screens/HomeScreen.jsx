@@ -162,7 +162,7 @@ const HomeScreen = (props) => {
                             onSnapToItem={setCurrentIndex}
                             vertical={true}
                             renderItem={renderCaroseulItem}
-                            data={value.cards}
+                            data={value.user.cards}
                             itemHeight={110}
                             sliderHeight={450}
                             activeSlideAlignment='start'
