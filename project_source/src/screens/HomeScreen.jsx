@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef } from 'react'
 import Icon from 'react-native-vector-icons/Feather'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import { useNavigation } from '@react-navigation/native'
-import { SafeAreaView, Animated, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import Carousel from 'react-native-snap-carousel';
 
@@ -15,8 +15,6 @@ import { useTheme } from '@pavelgric/react-native-theme-provider'
 
 const HomeScreen = (props) => {
     const navigation = useNavigation();
-    const currentUser = useContext(UserContext)
-    const currentTheme = useTheme()
     const [currentIndex, setCurrentIndex] = useState(0)
 
 
@@ -156,21 +154,26 @@ const HomeScreen = (props) => {
 
     return (
         <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards" style={{textAlign: 'left', flex: 1}}/>} topRightChild={SettingsIcon}>
-            <View style={styles.cardContainer}>
-                <Carousel
-                    onSnapToItem={setCurrentIndex}
-                    vertical={true}
-                    renderItem={renderCaroseulItem}
-                    data={[0, 1, 2]}
-                    itemHeight={110}
-                    sliderHeight={450}
-                    activeSlideAlignment='start'
-                    loop={true}
-                    layout='tinder'
-                    layoutCardOffset={10}
-                    inactiveSlideShift={0}
-                />
-            </View>
+            <UserContext.Consumer>
+                {value => {
+                    return(
+                    <View style={styles.cardContainer}>
+                        <Carousel
+                            onSnapToItem={setCurrentIndex}
+                            vertical={true}
+                            renderItem={renderCaroseulItem}
+                            data={value.cards}
+                            itemHeight={110}
+                            sliderHeight={450}
+                            activeSlideAlignment='start'
+                            loop={true}
+                            layout='tinder'
+                            layoutCardOffset={10}
+                            inactiveSlideShift={0}
+                        />
+                    </View>)
+                }}
+            </UserContext.Consumer>
             <View style={styles.buttonContainer}>
                 {currentIndex !== -1 ? RightIcon(cardObjectInfoList.numbers[currentIndex]): <View></View>}
                 {currentIndex !== -1 ? LeftIcon(cardObjectInfoList.numbers[currentIndex]): <View></View>}

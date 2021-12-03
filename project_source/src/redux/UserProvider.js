@@ -23,7 +23,7 @@ export class UserProvider extends React.Component {
 
     async storeData() {
         try {
-            await AsyncStorage.setItem('data', JSON.stringify(this.state))
+            await AsyncStorage.setItem('data', JSON.stringify(this.state.user))
         } catch (error) {
             console.log('Store Data')
             console.log(error)
@@ -34,7 +34,7 @@ export class UserProvider extends React.Component {
         try {
             let dataLoaded = await AsyncStorage.getItem('data')
             if(dataLoaded !== undefined){
-                this.setState(data)
+                this.setState({ user:data})
             }
         } catch (error) {
             console.log('Load Data')

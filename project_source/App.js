@@ -20,6 +20,7 @@ import UserContext from './src/redux/UserContext';
 
 function App() {
   const Stack = createNativeStackNavigator();
+  const UserData = UserContext
   // state for ui holding tasks 
   const [loaded,setloaded] = useState(false);
   const [cards, setCards] = useState([])
@@ -28,7 +29,7 @@ function App() {
   let initialRoute = ""; // Home
   let ConfirmPinOptions = {}
 
-  const checkPin = async () => {
+  const loadData = async () => {
     try {
       let pinPulled = await AsyncStorage.getItem('pin')
       let cardsPulled = await AsyncStorage.getItem('cards')
@@ -42,10 +43,11 @@ function App() {
       }
     } catch (error) {
       initialRoute = 'Intro'
+      console.log('Pin: '+error)
     }
   }
 
-  const fonts = Font.loadAsync({
+  const fonts = () => Font.loadAsync({
     'Lato': require('./assets/fonts/Lato-Regular.ttf'),
     'Lato-Bold': require('./assets/fonts/Lato-Bold.ttf'),
     'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
@@ -55,66 +57,62 @@ function App() {
   if(!loaded) {
     return (
       <AppLoading
-        startAsync={Promise.all(fonts, checkPin)}
+        startAsync={() => Promise.all(fonts, loadData)}
         onFinish={()=>{
+          console.log('FInished')
           setloaded(true)
         }}
         onError={console.warn}
       />
     )
+  } else {
+    return (
+      <UserProvider>
+        <ThemeContainer>
+            <NavigationContainer>
+              <Stack.Navigator 
+                screenOptions={{
+                  headerShown: false
+                }}
+                initialRouteName={initialRoute}>
+                <Stack.Screen 
+                  name="Home"  
+                  component={HomeScreen}
+                />
+                <Stack.Screen 
+                  name="CardDetails" 
+                  component={CardDetailsScreen}
+                />
+                <Stack.Screen 
+                  name="CardType"  
+                  component={CardTypeScreen}
+                />
+                <Stack.Screen 
+                  name="Test"  
+                  component={IndexScreen}
+                />
+                <Stack.Screen 
+                  name="Intro"  
+                  component={IntroScreen}/>
+                <Stack.Screen
+                  name="Pin"  
+                  component={PinScreen}
+                />
+                <Stack.Screen
+                  name="PinConfirm"  
+                  component={ConfirmPinScreen}
+                  options={ConfirmPinOptions}
+                />
+                <Stack.Screen
+                  name="ManualEntry"
+                  component={ManualEntryScreen}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
+        </ThemeContainer>
+      </UserProvider>
+    )
   }
-  return (
-    <UserProvider>
-      <ThemeContainer>
-          <NavigationContainer>
-            <UserContext.Provider value={{
-              pin: pin,
-              cards: cards
-            }}>
-            <Stack.Navigator 
-              screenOptions={{
-                headerShown: false
-              }}
-              initialRouteName={initialRoute}>
-              <Stack.Screen 
-                name="Home"  
-                component={HomeScreen}
-              />
-              <Stack.Screen 
-                name="CardDetails" 
-                component={CardDetailsScreen}
-              />
-              <Stack.Screen 
-                name="CardType"  
-                component={CardTypeScreen}
-              />
-              <Stack.Screen 
-                name="Test"  
-                component={IndexScreen}
-              />
-              <Stack.Screen 
-                name="Intro"  
-                component={IntroScreen}/>
-              <Stack.Screen
-                name="Pin"  
-                component={PinScreen}
-              />
-              <Stack.Screen
-                name="PinConfirm"  
-                component={ConfirmPinScreen}
-                options={ConfirmPinOptions}
-              />
-              <Stack.Screen
-                name="ManualEntry"
-                component={ManualEntryScreen}
-              />
-            </Stack.Navigator>
-          </UserContext.Provider>
-          
-          </NavigationContainer>
-      </ThemeContainer>
-    </UserProvider>
-  )
 }
 
 
