@@ -25,13 +25,21 @@ const themeCreator = createStyle((currentTheme) => ({
   } 
 }))
 
-function TouchableTextButton ({text, onTap}) {
+function TouchableTextButton ({text, onTap, enabled}) {
   const styles = useStyle(themeCreator)
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.button}
-        onPress={onTap}
+        onPress={() => {
+          if(enabled !== undefined) {
+            if(enabled) {
+              onTap()
+            }
+          } else {
+            onTap()
+          }
+        }}
       >
         <RegularText text={text}/>
       </TouchableOpacity>

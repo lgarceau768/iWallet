@@ -12,7 +12,6 @@ const TitleText = (props) => {
             paddingBottom: 40,
             fontSize: 34,
             fontWeight: 'bold',
-            flex: 1,
             textAlign: 'center',
             color: t.colors.text,
             ...props.style

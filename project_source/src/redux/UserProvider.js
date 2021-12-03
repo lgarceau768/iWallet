@@ -1,5 +1,5 @@
 import React from "react";
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import UserContext from "./UserContext";
 import uuid from 'react-native-uuid';
 
@@ -14,6 +14,31 @@ export class UserProvider extends React.Component {
         user: {
             pin: '',
             cards: []
+        }
+    }
+
+    componentWillReceiveProps = (newData) => {
+        this.storeData(newData)
+    }
+
+    async storeData() {
+        try {
+            await AsyncStorage.setItem('data', JSON.stringify(this.state))
+        } catch (error) {
+            console.log('Store Data')
+            console.log(error)
+        }
+    }
+
+    async loadData() {
+        try {
+            let dataLoaded = await AsyncStorage.getItem('data')
+            if(dataLoaded !== undefined){
+                this.setState(data)
+            }
+        } catch (error) {
+            console.log('Load Data')
+            console.log(error)
         }
     }
 

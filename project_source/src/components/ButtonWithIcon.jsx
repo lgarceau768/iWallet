@@ -12,6 +12,8 @@ function ButtonWithIcon ({text, onTap, iconName, iconSize, iconColor, exstyle}) 
             flexDirection: 'row',
             backgroundColor: currentTheme.colors.card,
             borderRadius: 10,
+            margin: 15,
+            maxWidth: '50%',
             padding: 15,
             flex: 0.5,
             flexBasis: 120,

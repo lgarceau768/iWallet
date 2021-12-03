@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import RegularText from '../components/RegularText'
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 import { useTheme } from '@pavelgric/react-native-theme-provider';
 
-function ManualEntry () {
+function ManualEntry (props) {
     const { t } = useTheme();
     const styles = StyleSheet.create({
         container: {
-            margin: 25,
-            height: 300,
+            marginVertical: 25,
+            height: '85%',
             // width: 300,
             justifyContent: 'center',
             display: 'flex',
@@ -26,10 +26,25 @@ function ManualEntry () {
 
     })
 
-    const _onChange = (form) => console.log(form);
-    const _onFocus = (field) => console.log("focusing", field);
+    const [errorText, setErrorText] = useState('')
 
-    
+    const _onChange = (form) => {
+        if(form.valid) {
+            props.onDone(form)
+        } else {
+            for (const input in form.status) {
+                if (Object.hasOwnProperty.call(form.status, input)) {
+                    const status = form.status[input];
+                    if(status == 'incomplete' || status == 'invalid') {
+                        let statusError = input.charAt(0).toUpperCase() + input.substring(1, input.length) + ' is ' + status
+                        setErrorText(statusError)
+                        return
+                    }
+                }
+            }
+        }
+    }
+
 
     // const styles = useStyle(styleCreator)
     return (
@@ -48,9 +63,9 @@ function ManualEntry () {
                 validColor={styles.input.color}
                 invalidColor={"red"}
                 // placeholderColor={themeCreator.lablel}
-
-                onFocus={_onFocus}
+            
                 onChange={_onChange} />
+            <RegularText text={errorText} style={{marginBottom: 32, color: 'red', fontSize: 18}}/>
         </View>
     )
 }

@@ -9,12 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 import TouchableTextButton from '../components/TouchableTextButton';
 
 const CardTypeScreen = (props) => {
-    const navigation = useNavigation();
-
-    const manualEntryScreenChange = () => {
-        navigation.navigate('ManualEntry');
-    }
-
+    const navigation = useNavigation()
     
     const styles = StyleSheet.create({
         container: {
@@ -23,29 +18,24 @@ const CardTypeScreen = (props) => {
             flexDirection: 'row',
             alignItems: 'center',
             flexWrap: 'wrap',
-            backgroundColor: 'blue',
             justifyContent: 'space-evenly',
         },
     });
     const openManualEntry = () => {
-        alert('Manual Entry Screen')
-        //navigations.navigate('ManualEntry')
+        navigation.navigate('ManualEntry')
     }
     const openAddCard = () => {
-        alert('Add Card Screen')
-        //navigations.navigate('AddCard')
+        navigation.navigate('AddCard')
     }
     const openAddIDCard = () => {
-        alert('Add ID Card Screen')
-        //navigations.navigate('AddIDCard')
+        navigation.navigate('AddIDCard')
     }
     return (
-        <MainContainer backBtn={true} topCenterChild={<TitleText text="CardType Screen"/>}>
-            <RegularText text="What type of card is it?" style={{textAlign: 'center'}}/>
+        <MainContainer backBtn={true} topCenterChild={<TitleText text="What type of card?" style={{textAlign: 'center', flex: 1}}/>}>
             <View style={styles.container}>
-                <ButtonWithIcon onTap={openAddCard} text='Credit Card' iconName='credit-card' iconSize={35} iconColor='#000'/>
+                <ButtonWithIcon onTap={openManualEntry} text='Credit Card' iconName='credit-card' iconSize={35} iconColor='#000'/>
                 <ButtonWithIcon onTap={openAddIDCard} text='ID Card' iconName='person' iconSize={30} iconColor='#000'/>
-                <ButtonWithIcon onTap={openManualEntry} text='Other' iconName='device-camera' iconSize={30} iconColor='#000'/>
+                <ButtonWithIcon onTap={openAddCard} text='Other' iconName='device-camera' iconSize={30} iconColor='#000'/>
             </View>
         </MainContainer>
     )

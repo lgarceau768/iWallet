@@ -155,7 +155,7 @@ const HomeScreen = (props) => {
     }
 
     return (
-        <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards" style={{textAlign: 'left'}}/>} topRightChild={SettingsIcon}>
+        <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards" style={{textAlign: 'left', flex: 1}}/>} topRightChild={SettingsIcon}>
             <View style={styles.cardContainer}>
                 <Carousel
                     onSnapToItem={setCurrentIndex}

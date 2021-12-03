@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Font from 'expo-font';
-import { AsyncStorage } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // Screen imports
 import ThemeContainer from './src/components/ThemeContainer'
@@ -19,49 +16,46 @@ import PinScreen from './src/screens/PinScreen';
 import ConfirmPinScreen from './src/screens/ConfirmPinScreen';
 import { UserProvider } from './src/redux/UserProvider';
 import ManualEntryScreen from './src/screens/ManualEntryScreen';
-
-
-
+import UserContext from './src/redux/UserContext';
 
 function App() {
   const Stack = createNativeStackNavigator();
   // state for ui holding tasks 
   const [loaded,setloaded] = useState(false);
+  const [cards, setCards] = useState([])
+  const [pin, setPin] = useState('')
   // check to see if the user has opened the app before
-  let initialRoute = "Home"; // Home
+  let initialRoute = ""; // Home
   let ConfirmPinOptions = {}
 
-  const loadStuff = async () => {
-    const fonts = Font.loadAsync({
-      'Lato': require('./assets/fonts/Lato-Regular.ttf'),
-      'Lato-Bold': require('./assets/fonts/Lato-Bold.ttf'),
-      'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
-    });
-
-    const checkPin = async () => {
-      try {
-        let pin = await AsyncStorage.getItem('pin')
-        if(pin !== null) {
-          initialRoute = 'ConfirmPin';
-          ConfirmPinOptions = {pin}
-        }
-      } catch (error) {
-        console.error(error)
+  const checkPin = async () => {
+    try {
+      let pinPulled = await AsyncStorage.getItem('pin')
+      let cardsPulled = await AsyncStorage.getItem('cards')
+      if(pinPulled !== null) {
+        initialRoute = 'ConfirmPin';
+        ConfirmPinOptions = {pin}
+        setPin(pinPulled)
       }
+      if(cardsPulled !== null){
+        setCards(cardsPulled)
+      }
+    } catch (error) {
+      initialRoute = 'Intro'
     }
-
-    const promises = [];
-    promises.push(fonts);
-    promises.push(checkPin)
-
-    return Promise.all(promises)
   }
+
+  const fonts = Font.loadAsync({
+    'Lato': require('./assets/fonts/Lato-Regular.ttf'),
+    'Lato-Bold': require('./assets/fonts/Lato-Bold.ttf'),
+    'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
+  });
 
   // Render iWallet App
   if(!loaded) {
     return (
       <AppLoading
-        startAsync={loadStuff}
+        startAsync={Promise.all(fonts, checkPin)}
         onFinish={()=>{
           setloaded(true)
         }}
@@ -69,11 +63,14 @@ function App() {
       />
     )
   }
-
   return (
     <UserProvider>
       <ThemeContainer>
           <NavigationContainer>
+            <UserContext.Provider value={{
+              pin: pin,
+              cards: cards
+            }}>
             <Stack.Navigator 
               screenOptions={{
                 headerShown: false
@@ -112,6 +109,8 @@ function App() {
                 component={ManualEntryScreen}
               />
             </Stack.Navigator>
+          </UserContext.Provider>
+          
           </NavigationContainer>
       </ThemeContainer>
     </UserProvider>

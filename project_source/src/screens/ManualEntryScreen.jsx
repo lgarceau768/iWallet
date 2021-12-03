@@ -20,16 +20,17 @@ const ManualEntryScreen = (props) => {
     const { selectedTheme, themes, t} = useTheme()
     const {setTheme} = useThemeDispatch()
 
-    const toggleTheme = () => {
-        const nextTheme = selectedTheme === 'dark' ? 'light': 'dark'
-        setTheme(nextTheme)
+
+    const addCard = (card) => {
+        let cardData = card.values
     }
+
 
     return (
         <MainContainer backBtn={true} topCenterChild={<TitleText text="Manual CC Entry"/>}>
-            {/* <TouchableTextButton onTap={toggleTheme.bind(this)} text="Theme"/> */}
-            <ManualEntry />
-            <TouchableTextButton onTap={toggleTheme.bind(this)} text="Theme"/>
+            <ManualEntry onDone={(card) => {
+                addCard(card)
+            }}/>
         </MainContainer>
     )
 }

@@ -80,7 +80,6 @@ const ConfirmPinScreen = (props) => {
                     navigator.navigate('Home')
                 })
                 .catch(console.error)
-            
         }
     }
 
