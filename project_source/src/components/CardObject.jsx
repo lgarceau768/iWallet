@@ -78,14 +78,7 @@ const CardObject = ({
     const LockedIcon = (<Icon name='locked' size={68} color={currentTheme.t.lockedColor} style={styles.lockIcon}/>)
 
     if(cardType == 'pay') {
-        // add spaces to the card number
-        let displayNum = '';
-        for(let i = 0; i < cardData.number.length + 4; i++) {
-            if(i % 4 == 0 && i !== 0) {
-                displayNum = displayNum + ' '
-            } 
-            displayNum = displayNum + cardData.number.charAt(i)
-        }
+        // add spaces to the card numbe
         const CardComponent = (
             <LinearGradient 
                 start={{x: 0, y: 0}}
@@ -98,13 +91,13 @@ const CardObject = ({
                         width={70}
                         height={40}
                     />
-                    <RegularText text={cardData.fullname} oppositeColor={true} style={styles.moreSpacedText}/>
-                    <RegularText text={displayNum} oppositeColor={true} style={styles.spacedText}/>
+                    <RegularText text={cardData.name} oppositeColor={true} style={styles.moreSpacedText}/>
+                    <RegularText text={cardData.number} oppositeColor={true} style={styles.spacedText}/>
                 </View>
                 <View style={styles.rightView}>
                     <View style={styles.smallSpacer}></View>
                     { cardData.chip ? <Image source={require('../../assets/chip.png')} style={styles.logo} color='#F5B85F'/> : <View style={styles.logo}></View>}
-                    <RegularText text={cardData.exp} oppositeColor={true} style={styles.spacedText}/>
+                    <RegularText text={cardData.expiry} oppositeColor={true} style={styles.spacedText}/>
                 </View>
             </LinearGradient>
         )
@@ -122,7 +115,8 @@ const CardObject = ({
         }
     } else if(cardType == 'id') {
         // fields will be
-        const { number, fullname, exp, tap, cardName, iconName, bgColors } = cardData 
+        console.log(cardData)
+        const { number, name, expiry, tap, issuer, iconName, bgColors } = cardData 
         return (
             <LinearGradient 
                 start={{x: 0, y: 0}}
@@ -131,13 +125,13 @@ const CardObject = ({
                 style={styles.container}>
                 <View style={styles.leftView}>
                     <FontAwesome name={iconName} size={70} color={currentTheme.t.oppositeThemeText} style={styles.icon}/>
-                    <RegularText text={cardName} oppositeColor={true} style={styles.moreSpacedText}/>
+                    <RegularText text={issuer} oppositeColor={true} style={styles.moreSpacedText}/>
                     <RegularText text={number} oppositeColor={true} style={styles.spacedText}/>
                 </View>
                 <View style={styles.rightView}>
                     <View style={styles.spacer}></View>
-                    <RegularText text={fullname} oppositeColor={true} style={styles.spacedText}/>
-                    <RegularText text={exp} oppositeColor={true} style={styles.spacedText}/>
+                    <RegularText text={name} oppositeColor={true} style={styles.spacedText}/>
+                    <RegularText text={expiry} oppositeColor={true} style={styles.spacedText}/>
                 </View>
             </LinearGradient>
         )

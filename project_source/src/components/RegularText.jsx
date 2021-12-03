@@ -8,8 +8,7 @@ const RegularText = (props) => {
     // Pull style from theme (t is current theme)
     const styleCreator = createStyle((t) => ({
         regularText: {
-            fontFamily: 'Lato',
-            fontSize: 24,
+            fontSize: 22,
             color: props.oppositeColor ? t.colors.oppositeThemeText : t.colors.text,
             ...props.style
         }
