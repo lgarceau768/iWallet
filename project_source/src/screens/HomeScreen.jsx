@@ -26,8 +26,8 @@ const HomeScreen = (props) => {
         //navigation.navigate('Settings')
     }
     const openAddCards = () => {
-        alert('Add Card Screen')
-        //navigation.navigate('Settings')
+        // alert('Add Card Screen')
+        navigation.navigate('CardType')
     }
     const openPay = () => {
         alert('Pay with '+cardObjectInfoList.numbers[currentIndex])

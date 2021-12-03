@@ -4,38 +4,33 @@ import { createStyle, useStyle } from '@pavelgric/react-native-theme-provider';
 import RegularText from '../components/RegularText';
 import Icon from 'react-native-vector-icons/Octicons';
 
-function ButtonWithIcon ({text, onTap, iconName, iconSize, iconColor}) {
+function ButtonWithIcon ({text, onTap, iconName, iconSize, iconColor, exstyle}) {
     const themeCreator = createStyle((currentTheme) => ({
-        container: {
-            flex: 1,
-            justifyContent: "center",
-            alignItems: 'center'
-        },
         button: {
             alignItems: 'center',
             justifyContent: "center",
+            flexDirection: 'row',
             backgroundColor: currentTheme.colors.card,
             borderRadius: 10,
             padding: 15,
+            flex: 0.5,
+            flexBasis: 120,
             height: 100,
-            width: 200,
             shadowColor: currentTheme.colors.buttonShadow,
             shadowOffset: {width: 3, height: 4},
             shadowOpacity: currentTheme.values.buttonShadowOpacity,
+            ...exstyle
         }
     }))
-
     const styles = useStyle(themeCreator)
     return (
-        <View style={styles.container}>
         <TouchableOpacity
             style={styles.button}
             onPress={onTap}
         >
-            <RegularText text={text}/>
-            <Icon name={iconName} size={iconSize} color={iconColor}></Icon>
+            <RegularText text={text} style={{flex: 1}}/>
+            <Icon name={iconName} size={iconSize} color={iconColor}/>
         </TouchableOpacity>
-        </View>
     )     
 }
 
