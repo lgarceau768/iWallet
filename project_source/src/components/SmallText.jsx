@@ -5,7 +5,6 @@ import { createStyle, useStyle, useTheme } from '@pavelgric/react-native-theme-p
 // Pull style from theme (t is current theme)
 const styleCreator = createStyle((t) => ({
     smallText: {
-        fontFamily: 'Lato',
         color: t.colors.text
     }
 }))

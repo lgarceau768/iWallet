@@ -31,6 +31,7 @@ function ManualEntry (props) {
     const _onChange = (form) => {
         if(form.valid) {
             props.onDone(form)
+            setErrorText('')
         } else {
             for (const input in form.status) {
                 if (Object.hasOwnProperty.call(form.status, input)) {

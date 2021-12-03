@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -18,9 +18,14 @@ import { UserProvider } from './src/redux/UserProvider';
 import ManualEntryScreen from './src/screens/ManualEntryScreen';
 import UserContext from './src/redux/UserContext';
 
+const fonts = () => Font.loadAsync({
+  Lato: require('./assets/fonts/Lato-Regular.ttf'),
+  LatoBold: require('./assets/fonts/Lato-Bold.ttf'),
+  LatoLight: require('./assets/fonts/Lato-Light.ttf'),
+});
+
 function App() {
   const Stack = createNativeStackNavigator();
-  const UserData = UserContext
   // state for ui holding tasks 
   const [loaded,setloaded] = useState(false);
   const [cards, setCards] = useState([])
@@ -47,19 +52,13 @@ function App() {
     }
   }
 
-  const fonts = () => Font.loadAsync({
-    'Lato': require('./assets/fonts/Lato-Regular.ttf'),
-    'Lato-Bold': require('./assets/fonts/Lato-Bold.ttf'),
-    'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
-  });
-
   // Render iWallet App
   if(!loaded) {
     return (
       <AppLoading
         startAsync={() => Promise.all(fonts, loadData)}
         onFinish={()=>{
-          console.log('FInished')
+          console.log('Finished loading')
           setloaded(true)
         }}
         onError={console.warn}

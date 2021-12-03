@@ -5,10 +5,10 @@ import uuid from 'react-native-uuid';
 
 export class UserProvider extends React.Component {
     cardLogoImages = {
-        'Visa': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/visa_logo.svg',
-        'Amex': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/amex_logo.svg',
-        'MasterCard': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/mastercard.svg',
-        'Discover': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/discover_logo.svg',
+        'visa': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/visa_logo.svg',
+        'american-express': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/amex_logo.svg',
+        'master-card': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/mastercard.svg',
+        'discover': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/discover_logo.svg',
     }
     state = {
         user: {
@@ -17,13 +17,13 @@ export class UserProvider extends React.Component {
         }
     }
 
-    componentWillReceiveProps = (newData) => {
+    componentDidUpdate = (newData) => {
         this.storeData(newData)
     }
 
     async storeData() {
         try {
-            await AsyncStorage.setItem('data', JSON.stringify(this.state.user))
+            await AsyncStorage.setItem('data', JSON.stringify(this.state.user, null, 2))
         } catch (error) {
             console.log('Store Data')
             console.log(error)
@@ -34,7 +34,7 @@ export class UserProvider extends React.Component {
         try {
             let dataLoaded = await AsyncStorage.getItem('data')
             if(dataLoaded !== undefined){
-                this.setState({ user:data})
+                this.setState({ user: JSON.parse(dataLoaded)})
             }
         } catch (error) {
             console.log('Load Data')
@@ -88,87 +88,22 @@ export class UserProvider extends React.Component {
 
     validateCard(cardObj) { 
         // need to look for all fields
-        let requiredFields = ['name', 'number', 'cvv', 'exp', 'pay', 'tap','zip', 'chip', 'locked', 'fullname']
+        let requiredFields = ['name', 'number', 'cvc', 'expiry', 'pay', 'tap','postalCode', 'chip', 'locked']
         for (const field in requiredFields) {
-            if (!Object.hasOwnProperty.call(cardObj, field)) {
+            if (!Object.hasOwnProperty.call(cardObj, requiredFields[field])) {
                 return {
                     error: {
                         type: 'Validation Error',
-                        message: 'Card Missing ' + field
+                        message: 'Card Missing ' + requiredFields[field]
                     }
-                }
-            }
-        }
-        
-        // check for a fullname
-        let nameValid = /^[a-zA-Z]+$/;
-        if(!nameValid.test(cardObj['fullname'])) {
-            return {
-                error: {
-                    type: 'Validation Error',
-                    message: 'Invalid Name on Card'
                 }
             }
         }
 
         // only check pay related fields if pay card
         if(cardObj['pay']) {
-            // has all fields
-            if(cardObj['number'].length < 15 || cardObj['number'].length > 16) {
-                return {
-                    error: {
-                        type: 'Validation Error',
-                        message: 'Invalid Card Number'
-                    }
-                }
-            }
-
-            // check number for validity
-            let validCard = this.figureOutCardBrand(cardObj['number'])
-            if(!validCard['isValid']) {
-                return {
-                    error: {
-                        type: 'Validation Error',
-                        message: 'Invalid Card Number'
-                    }
-                }
-            }
-
-            // validate cvv
-            let cvvValid = /^\d{3}$/
-            if(!cvvValid.test(cardObj['cvv'])) {
-                return {
-                    error: {
-                        type: 'Validation Error',
-                        message: 'Invalid CVV Number'
-                    }
-                }
-            }
-
-            // validate zip
-            let zipValid = /^\d{5}$/
-            if(!zipValid.test(cardObj['zip'])) {
-                return {
-                    error: {
-                        type: 'Validation Error',
-                        message: 'Invalid Zip Code'
-                    }
-                }
-            }
-
-            // validate the exp
-            let expireValid = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
-            if(!expireValid.test(cardObj['exp'])) {
-                return {
-                    error: {
-                        type: 'Validation Error',
-                        message: 'Invalid Expiration Date'
-                    }
-                }
-            }
-
             // set card issuer and logo image
-            cardObj.issuer = validCard['cardType']
+            cardObj.issuer = cardObj['type']
             cardObj.logoImage = this.cardLogoImages[cardObj.issuer]
         }   
         
@@ -186,7 +121,7 @@ export class UserProvider extends React.Component {
         }
 
         cardObj.bgColors = []
-        for(let i = 0; i < generateColor(2); i++){
+        for(let i = 0; i < getRandomInt(2); i++){
             cardObj.bgColors.push(generateColor())
         }
 

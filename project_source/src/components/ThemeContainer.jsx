@@ -5,7 +5,6 @@ import Themes from '../util/Themes';
 
 const ThemeContainer = (props) => {
     const userTheme = useColorScheme()
-    console.log(userTheme)
     return (
         <ThemeProvider
             themes={Themes}
