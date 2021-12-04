@@ -12,12 +12,15 @@ import IconButton from '../components/IconButton'
 import UserContext from '../redux/UserContext'
 import CardObject from '../components/CardObject'
 import IDialogBox from '../components/DialogBox'
+import { useTheme } from '@pavelgric/react-native-theme-provider'
+import RegularText from '../components/RegularText'
 
 const HomeScreen = (props) => {
     const navigation = useNavigation();
     let carousel = useRef(null)
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const [currentIndex, setCurrentIndex] = useState(undefined)
     const UserData = useContext(UserContext)
+    const themeVar = useTheme()
 
 
     /** Functions for navigation */
@@ -65,7 +68,7 @@ const HomeScreen = (props) => {
             justifyContent: 'center',
             flexDirection: 'row',
             alignItems: 'flex-start',
-            flex: 1,
+            flex: 0.4,
         },
         buttonContainer: {
             height: 65,
@@ -73,6 +76,11 @@ const HomeScreen = (props) => {
             marginBottom: 10,
             flexDirection: 'row',
             justifyContent: 'space-between',
+        },
+        infoContainer: {
+            flex: 0.6,
+            height: 200,
+            padding: 10
         }
    })
 
@@ -93,8 +101,35 @@ const HomeScreen = (props) => {
             <View style={styles.iconButtonContainer}>{RightIcon()}</View>
         )
     }
+
+    const Hr = (color) => {
+        return (
+            <View
+                style={{
+                borderBottomColor: color,
+                borderBottomWidth: 1,
+                }}
+            />
+        )
+    }
+
     const SettingsIcon = (<IconButton size={50} color='rgb(255, 134, 117)' icon={<Icon name="settings" size={35} color="#FFF"/>} onTap={openSettings}/>)
     const AddIcon = (<IconButton size={65} color="#7A73C6" icon={<Icon name="plus" size={50} color="#FFF"/>} onTap={openAddCards}/>)
+
+    const createDetailNumber = () => {
+        try {
+            let number = UserData.user.cards[currentIndex].number
+            return "\t\t\t\t\t\t**** " + number.substring(number.length - 4)
+        } catch (e) {
+            return ""
+        } 
+    }
+
+    useEffect(() => {
+        if(carousel.currentIndex !== undefined) {
+            setCurrentIndex(carousel.currentIndex)
+        }
+    }, [carousel.currentIndex])
 
     const createCard = (card) => {
         if (card.pay) {
@@ -122,8 +157,6 @@ const HomeScreen = (props) => {
     const renderCaroseulItem = ({item, index}) => {
         return createCard(item)
     }
-
-
     return (
         <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards" style={{textAlign: 'left', flex: 1}}/>} topRightChild={SettingsIcon}>
             
@@ -143,9 +176,19 @@ const HomeScreen = (props) => {
                         inactiveSlideShift={0}
                     />
                 </View>
+            {UserData.user.cards.length > 0 ?
+                Hr(themeVar.t.colors.text):
+                <RegularText text={'Press the + button to \nadd your first card!'} style={{flex: 1, textAlign: 'center'}}/>
+            }
+            {currentIndex !== undefined && UserData.user.cards.length > 0 ?
+                <View style={styles.infoContainer}>
+                    <RegularText text={'Number: ' + createDetailNumber()}/>
+                </View>
+            : 
+            null}
             <View style={styles.buttonContainer}>
-                {currentIndex !== -1 ? RightIcon(): <View></View>}
-                {currentIndex !== -1 ? LeftIcon(): <View></View>}
+                {carousel.currentIndex !== -1 ? RightIcon(): <View></View>}
+                {carousel.currentIndex !== -1 ? LeftIcon(): <View></View>}
                 {AddIcon}
             </View>
         </MainContainer>
