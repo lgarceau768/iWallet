@@ -56,6 +56,20 @@ export class UserProvider extends React.Component {
         return {cards}
     } 
 
+    toggleLock(index) {
+        if(index === -1) {
+            return {
+                error: {
+                    type: 'Not found',
+                    message: 'The specified card was not found'
+                }
+            }
+        }
+        const cards = Object.assign([], this.state.user.cards)
+        cards[index].locked = !cards[index].locked
+        return {cards}
+    }
+
     figureOutCardBrand(cardNum) {
         let visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
         let mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
@@ -170,6 +184,19 @@ export class UserProvider extends React.Component {
                             return onDone()
                         }
                     },
+                    toggleLock: (cardIndex, onErr, onDone) => {
+                        let result = this.toggleLock(cardIndex);
+                        if(result.err) {
+                            return onErr(result.err)
+                        } else {
+                            const currentUser = Object.assign({}, this.state.user)
+                            currentUser.cards = result.cards
+                            console.log(currentUser)
+                            this.setState({user: currentUser})
+                            this.storeData()
+                            return onDone()
+                        }
+                    }
                 }}
             >
                 {this.props.children}

@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StyleSheet, View } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import Carousel from 'react-native-snap-carousel';
+import SwitchToggle from "react-native-switch-toggle";
 
 import MainContainer from '../components/MainScreenContainer'
 import TitleText from '../components/TitleText'
@@ -21,6 +22,7 @@ const HomeScreen = (props) => {
     const [currentIndex, setCurrentIndex] = useState(undefined)
     const UserData = useContext(UserContext)
     const themeVar = useTheme()
+    const [locked, setLocked] = useState(false)
 
 
     /** Functions for navigation */
@@ -81,6 +83,28 @@ const HomeScreen = (props) => {
             flex: 0.6,
             height: 200,
             padding: 10
+        },
+        toggleContainer: {
+            width: '100%',
+            height: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignContent: 'flex-start',
+            alignItems: 'center'
+        },
+        rowContainer: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        },
+        textStyle: {
+            marginBottom: 14,
+            flex: 0.5
+        },
+        textStyleRight: {
+            marginBottom: 14,
+            flex: 0.5,
+            textAlign: 'right'
         }
    })
 
@@ -119,10 +143,43 @@ const HomeScreen = (props) => {
     const createDetailNumber = () => {
         try {
             let number = UserData.user.cards[currentIndex].number
-            return "\t\t\t\t\t\t**** " + number.substring(number.length - 4)
+            return "**** " + number.substring(number.length - 4)
         } catch (e) {
             return ""
         } 
+    }
+
+    const createIssuer = () => {
+        try {
+            let issuer = UserData.user.cards[currentIndex].issuer
+            if(issuer.indexOf('-') != -1) {
+                let splitArr = issuer.split('-')
+                issuer = ''
+                splitArr.forEach(str => {
+                    issuer += str.charAt(0).toUpperCase() + str.substring(1)
+                });
+            } else {
+                issuer = issuer.charAt(0).toUpperCase() + issuer.substring(1)
+            }
+            return issuer
+        } catch (e) {
+            return ""
+        }
+    }
+
+    const getCardExp = () => {
+        try {
+            return UserData.user.cards[currentIndex].expiry
+        } catch (e) { return "" }
+    }
+
+    const onLockedTap = (index) => {
+        IDialogBox({
+            title: "Locked Card", 
+            text: "Would you like to unlock this card?",
+            onYes: () => UserData.toggleLock(index, console.error, console.debug),
+            onCancel: () => {}
+        })
     }
 
     useEffect(() => {
@@ -131,7 +188,7 @@ const HomeScreen = (props) => {
         }
     }, [carousel.currentIndex])
 
-    const createCard = (card) => {
+    const createCard = (card, index) => {
         if (card.pay) {
             return (
                 <Swipeable renderLeftActions={() => LeftSwipePay()} renderRightActions={() => RightSwipeDelete()}>            
@@ -145,17 +202,29 @@ const HomeScreen = (props) => {
                             issuer: card.issuer,
                             expiry: card.expiry,
                             logoImage: card.logoImage,
-                            chip: card.chip
-                    }}/>
+                            chip: card.chip,
+                            locked: card.locked,
+                        }}
+                        index={index}
+                        onLocked={onLockedTap}
+                    />
                 </Swipeable>
             )
         } else {
-            console.log('Not implemented yet')
+            console.error('Not implemented yet')
         }
-    }      
+    }   
+    
+    const getSwitchOn = () => {
+        let switchVal = false
+        try {
+            switchVal = UserData.user.cards[currentIndex].locked
+        } catch (e) {}
+        return switchVal
+    }
 
     const renderCaroseulItem = ({item, index}) => {
-        return createCard(item)
+        return createCard(item, index)
     }
     return (
         <MainContainer backBtn={false} topCenterChild={<TitleText text="Cards" style={{textAlign: 'left', flex: 1}}/>} topRightChild={SettingsIcon}>
@@ -182,7 +251,44 @@ const HomeScreen = (props) => {
             }
             {currentIndex !== undefined && UserData.user.cards.length > 0 ?
                 <View style={styles.infoContainer}>
-                    <RegularText text={'Number: ' + createDetailNumber()}/>
+                    <View style={styles.toggleContainer}>
+                        <View style={styles.rowContainer}>
+                            <RegularText text={'Number: '} style={styles.textStyle}/>
+                            <RegularText text={createDetailNumber()} style={styles.textStyleRight}/>
+                        </View>
+                        <View style={styles.rowContainer}>
+                            <RegularText text={'Card Type: '} style={styles.textStyle}/>
+                            <RegularText text={createIssuer()} style={styles.textStyleRight}/>
+                        </View>
+                        <View style={styles.rowContainer}>
+                            <RegularText text={'Card Expiration'} style={styles.textStyle}/>
+                            <RegularText text={getCardExp()} style={styles.textStyleRight}/>
+                        </View>
+                        <View style={styles.rowContainer}>
+                            <RegularText text={'Lock Card'} style={{...styles.textStyle, flex: 1}}/>
+                            <SwitchToggle 
+                                switchOn={getSwitchOn()} 
+                                onPress={() => {
+                                    UserData.toggleLock(carousel.currentIndex, console.error, console.debug)
+                                }}
+                                circleColorOff='#2f2f2f'
+                                circleColorOn='#c3061a'
+                                backgroundColorOn='#5b242a'
+                                backgroundColorOff='#C4C4C4'
+                                containerStyle={{
+                                width: 65,
+                                height: 32,
+                                borderRadius: 25,
+                                padding: 5,
+                                }}
+                                circleStyle={{
+                                width: 25,
+                                height: 25,
+                                borderRadius: 20,
+                                }}
+                            />
+                        </View>
+                    </View>
                 </View>
             : 
             null}

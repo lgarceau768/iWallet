@@ -9,10 +9,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 const CardObject = ({
-    cardType, cardData
+    cardType, cardData, onLocked, index
 }) => {
     const currentTheme = useTheme();
-
     const themedStyle = createStyle((t) => ({
         container: {
             width: '95%',
@@ -102,17 +101,17 @@ const CardObject = ({
             </LinearGradient>
         )
     
-        if(cardData.locked) {
-            return (
-                // TODO change the onPress to pop up an alert
-                <TouchableOpacity style={styles.lockedStyle} onPress={() => alert('This card is locked')}>                
-                    {CardComponent}
-                    {LockedIcon}
-                </TouchableOpacity>
-            )
-        } else {
-            return CardComponent
-        }
+        return (
+
+            <TouchableOpacity style={styles.lockedStyle} onPress={() => {
+                if(cardData.locked) {
+                    onLocked(index)
+                }
+            }}>                
+            {CardComponent}
+            {cardData.locked ? LockedIcon: null}
+        </TouchableOpacity>
+        )
     } else if(cardType == 'id') {
         // fields will be
         console.log(cardData)

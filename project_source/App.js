@@ -48,7 +48,7 @@ function App() {
       }
     } catch (error) {
       initialRoute = 'Intro'
-      console.log('Pin: '+error)
+      console.error('Pin: '+error)
     }
   }
 
@@ -58,7 +58,6 @@ function App() {
       <AppLoading
         startAsync={() => Promise.all(fonts, loadData)}
         onFinish={()=>{
-          console.log('Finished loading')
           setloaded(true)
         }}
         onError={console.warn}
