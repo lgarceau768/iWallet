@@ -66,7 +66,9 @@ export class UserProvider extends React.Component {
             }
         }
         const cards = Object.assign([], this.state.user.cards)
-        cards[index].locked = !cards[index].locked
+        try {
+            cards[index].locked = !cards[index].locked
+        } catch (e) {}
         return {cards}
     }
 

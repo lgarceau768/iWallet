@@ -263,7 +263,7 @@ const HomeScreen = (props) => {
                         <View style={styles.rowContainer}>
                             <RegularText text={'Card Expiration'} style={styles.textStyle}/>
                             <RegularText text={getCardExp()} style={styles.textStyleRight}/>
-                        </View>
+                        </View>d
                         <View style={styles.rowContainer}>
                             <RegularText text={'Lock Card'} style={{...styles.textStyle, flex: 1}}/>
                             <SwitchToggle 
