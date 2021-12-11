@@ -35,7 +35,14 @@ const HomeScreen = (props) => {
         navigation.navigate('CardType')
     }
     const openPay = () => {
-        alert('Pay with '+carousel.currentIndex)
+        IDialogBox({
+            title: "Payment", 
+            text: "Would you like to pay with this card?",
+            onYes: () => {
+                alert('*TODO* Paying with '+createIssuer())
+            },
+            onCancel: () => {}
+        })
         
     }
     const deleteCard = () => {
@@ -161,7 +168,7 @@ const HomeScreen = (props) => {
             } else {
                 issuer = issuer.charAt(0).toUpperCase() + issuer.substring(1)
             }
-            return issuer
+            return issuer.toString()
         } catch (e) {
             return ""
         }
@@ -263,7 +270,7 @@ const HomeScreen = (props) => {
                         <View style={styles.rowContainer}>
                             <RegularText text={'Card Expiration'} style={styles.textStyle}/>
                             <RegularText text={getCardExp()} style={styles.textStyleRight}/>
-                        </View>d
+                        </View>
                         <View style={styles.rowContainer}>
                             <RegularText text={'Lock Card'} style={{...styles.textStyle, flex: 1}}/>
                             <SwitchToggle 

@@ -4,8 +4,8 @@ import { SvgUri } from 'react-native-svg';
 
 const Logo = (props) => {
     const [loading, setLoading] = useState(false);
-    const logoImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo.svg";
-    const logoSmallImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/logo_small.svg";
+    const logoImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/logo.svg";
+    const logoSmallImage = "http://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/logo_small.svg";
     const isSmall = props.withImage ?? false; // true false
 
     

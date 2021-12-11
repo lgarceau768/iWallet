@@ -15,9 +15,9 @@ const IntroScreen = () => {
     const { t } = useTheme()
     const navigator = useNavigation();
     const screenTextArray = ['Secure Your Wallet!', 'Select which one to use when needed!', 'Get started with your iWallet now!'];
-    const screenPaths = ['http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/intro1.png', 
-                            'http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/intro2.png', 
-                            'http://raw.githubusercontent.com/lgarceau768/iWallet/main/iwallet/assets/intro3.png']
+    const screenPaths = ['http://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/intro1.png', 
+                            'http://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/intro2.png', 
+                            'http://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/intro3.png']
     const onDone = () => {
         navigator.navigate('Pin')
     }

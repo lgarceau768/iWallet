@@ -104,7 +104,6 @@ export default class CardView extends Component {
     },
 
     scale: 1,
-    fontFamily: Platform.select({ ios: "courier", android: "monospace" }),
     imageFront: require("../images/card-front.png"),
     imageBack: require("../images/card-back.png"),
   };
@@ -123,7 +122,6 @@ export default class CardView extends Component {
       { scale },
       { translateY: ((BASE_SIZE.height * (scale - 1) / 2)) },
     ] };
-
     return (
       <View style={[s.cardContainer, containerSize]}>
         <FlipCard style={{ borderWidth: 0 }}

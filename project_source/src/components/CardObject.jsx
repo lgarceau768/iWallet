@@ -114,7 +114,7 @@ const CardObject = ({
         )
     } else if(cardType == 'id') {
         // fields will be
-        console.log(cardData)
+        //console.log(cardData)
         const { number, name, expiry, tap, issuer, iconName, bgColors } = cardData 
         return (
             <LinearGradient 

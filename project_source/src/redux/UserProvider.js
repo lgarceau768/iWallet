@@ -25,8 +25,8 @@ export class UserProvider extends React.Component {
         try {
             await AsyncStorage.setItem('data', JSON.stringify(this.state.user, null, 2))
         } catch (error) {
-            console.log('Store Data')
-            console.log(error)
+            //console.log('Store Data')
+            //console.log(error)
         }
     }
 
@@ -37,8 +37,8 @@ export class UserProvider extends React.Component {
                 this.setState({ user: JSON.parse(dataLoaded)})
             }
         } catch (error) {
-            console.log('Load Data')
-            console.log(error)
+            //console.log('Load Data')
+            //console.log(error)
         }
     }
 
@@ -180,7 +180,7 @@ export class UserProvider extends React.Component {
                         } else {
                             const currentUser = Object.assign({}, this.state.user)
                             currentUser.cards = result.cards
-                            console.log(currentUser)
+                            //console.log(currentUser)
                             this.setState({user: currentUser})
                             this.storeData()
                             return onDone()
@@ -193,7 +193,7 @@ export class UserProvider extends React.Component {
                         } else {
                             const currentUser = Object.assign({}, this.state.user)
                             currentUser.cards = result.cards
-                            console.log(currentUser)
+                            //console.log(currentUser)
                             this.setState({user: currentUser})
                             this.storeData()
                             return onDone()
