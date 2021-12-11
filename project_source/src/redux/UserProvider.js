@@ -42,16 +42,8 @@ export class UserProvider extends React.Component {
         }
     }
 
-    removeCard(cardID) {
-        let spliceIndex = -1;
-        for(let i = 0; i < this.state.user.cards.length; i++) {
-            const card = this.state.user.cards[i]
-            if(card.id === cardID) {
-                spliceIndex = i
-            }
-        }
-        const cards = Object.assign({}, this.state.user.cards)
-        if(spliceIndex === -1) {
+    removeCard(index) {
+        if(index === -1) {
             return {
                 error: {
                     type: 'Not Found',
@@ -59,9 +51,26 @@ export class UserProvider extends React.Component {
                 }
             }
         }
-        cards.splice(spliceIndex, 1)
+        const cards = Object.assign([], this.state.user.cards)
+        cards.splice(index, 1)
         return {cards}
     } 
+
+    toggleLock(index) {
+        if(index === -1) {
+            return {
+                error: {
+                    type: 'Not found',
+                    message: 'The specified card was not found'
+                }
+            }
+        }
+        const cards = Object.assign([], this.state.user.cards)
+        try {
+            cards[index].locked = !cards[index].locked
+        } catch (e) {}
+        return {cards}
+    }
 
     figureOutCardBrand(cardNum) {
         let visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
@@ -155,9 +164,12 @@ export class UserProvider extends React.Component {
                         if(result.err) {
                             return onErr(result.err)
                         } else {
-                            const currentUser = Object.assign({}, this.state.user)
-                            currentUser.cards.push(result)
-                            this.setState({user: currentUser})
+                            const currentUser = Object.assign([], this.state.user.cards)
+                            currentUser.push(result)
+                            this.setState({user: {
+                                pin: this.state.user.pin,
+                                cards: currentUser
+                            }})
                             return onDone()
                         }
                     },
@@ -168,10 +180,25 @@ export class UserProvider extends React.Component {
                         } else {
                             const currentUser = Object.assign({}, this.state.user)
                             currentUser.cards = result.cards
+                            console.log(currentUser)
                             this.setState({user: currentUser})
+                            this.storeData()
                             return onDone()
                         }
                     },
+                    toggleLock: (cardIndex, onErr, onDone) => {
+                        let result = this.toggleLock(cardIndex);
+                        if(result.err) {
+                            return onErr(result.err)
+                        } else {
+                            const currentUser = Object.assign({}, this.state.user)
+                            currentUser.cards = result.cards
+                            console.log(currentUser)
+                            this.setState({user: currentUser})
+                            this.storeData()
+                            return onDone()
+                        }
+                    }
                 }}
             >
                 {this.props.children}

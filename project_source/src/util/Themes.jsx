@@ -15,6 +15,9 @@ const DarkTheme = {
     },
     values: {        
         buttonShadowOpacity: 0.3,
+    },
+    shared: {
+        greenColor: ''
     }
 };
 
@@ -33,6 +36,9 @@ const LightTheme = {
     },
     values: {        
         buttonShadowOpacity: 0.4,
+    },
+    shared: {
+        greenColor: ''
     }
 };
 
