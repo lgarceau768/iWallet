@@ -27,12 +27,13 @@ const ManualEntryScreen = (props) => {
     const addCard = (card) => {
         let cardData = card.values
         let cardObj = {
-            ...cardData,
             tap: true,
             pay: true,
             locked: false,
-            chip: true
+            chip: true,
+            ...cardData,
         }
+        console.log(cardObj)
         UserData.addCard(cardObj, console.log, () => {
             navigation.navigate('Home')
         })

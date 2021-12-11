@@ -78,6 +78,7 @@ const CardObject = ({
 
     if(cardType == 'pay') {
         // add spaces to the card numbe
+        console.log(cardData)
         const CardComponent = (
             <LinearGradient 
                 start={{x: 0, y: 0}}

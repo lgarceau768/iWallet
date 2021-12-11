@@ -7,7 +7,7 @@ export class UserProvider extends React.Component {
     cardLogoImages = {
         'visa': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/visa_logo.svg',
         'american-express': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/amex_logo.svg',
-        'master-card': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/mastercard.svg',
+        'mastercard': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/mastercard.svg',
         'discover': 'https://raw.githubusercontent.com/lgarceau768/iWallet/main/project_source/assets/discover_logo.svg',
     }
     state = {
@@ -110,9 +110,9 @@ export class UserProvider extends React.Component {
         }
 
         // only check pay related fields if pay card
-        if(cardObj['pay']) {
+        if(cardObj.pay) {
             // set card issuer and logo image
-            cardObj.issuer = cardObj['type']
+            cardObj.issuer = cardObj.type
             cardObj.logoImage = this.cardLogoImages[cardObj.issuer]
         }   
         
