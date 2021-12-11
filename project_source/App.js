@@ -31,7 +31,7 @@ function App() {
   const [cards, setCards] = useState([])
   const [pin, setPin] = useState('')
   // check to see if the user has opened the app before
-  let initialRoute = ""; // Home
+  let initialRoute = "Intro"; // Home
   let ConfirmPinOptions = {}
 
   const loadData = async () => {
