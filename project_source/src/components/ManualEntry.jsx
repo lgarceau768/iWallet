@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import RegularText from '../components/RegularText'
-import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
+import { CreditCardInput } from "../credit-card-input";
 import { useTheme } from '@pavelgric/react-native-theme-provider';
 
 function ManualEntry (props) {
